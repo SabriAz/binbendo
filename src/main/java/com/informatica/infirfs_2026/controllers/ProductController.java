@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/products")
+@RequestMapping("/product")
 public class ProductController {
-    private ProductDAO productDAO;
+    private final ProductDAO productDAO;
 
     public ProductController(ProductDAO productDAO) {
         this.productDAO = productDAO;

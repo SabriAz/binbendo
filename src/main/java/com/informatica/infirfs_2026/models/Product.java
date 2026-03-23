@@ -3,6 +3,7 @@ package com.informatica.infirfs_2026.models;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Product {
@@ -14,6 +15,9 @@ public class Product {
     private String name;
     private String description;
     private double price;
+
+    @ManyToOne
+    private Category category;
 
 
     public Product(String name, String description, double price) {
