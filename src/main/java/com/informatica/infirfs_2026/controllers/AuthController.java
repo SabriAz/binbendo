@@ -53,7 +53,7 @@ public class AuthController {
 
         if (customUser != null){
             throw new ResponseStatusException(
-                    HttpStatus.NOT_FOUND, "Can not register with this email"
+                    HttpStatus.CONFLICT, "Email already in use"
             );
         }
         String encodedPassword = passwordEncoder.encode(authenticationDTO.password);
