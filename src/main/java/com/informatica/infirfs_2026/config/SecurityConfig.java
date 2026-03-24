@@ -42,12 +42,14 @@ public class SecurityConfig {
                     .requestMatchers("/auth/**").permitAll()
                     // Standaard boilerplate code
                     .requestMatchers("/error").anonymous()
+
                     // Hieronder de endpoints waar iedereen zonder inlog of registratie iets mee mag doen
-                    .requestMatchers(HttpMethod.GET, "/product", "/product/**").permitAll()
+                    .requestMatchers(HttpMethod.GET, "/product", "/product/**", "/category", "/category/**").permitAll()
+
                     // Hieronder de enpoints waar alleen admins bij mogen
-                    .requestMatchers(HttpMethod.POST, "/product").hasRole("ADMIN")
-                    .requestMatchers(HttpMethod.DELETE, "/product/**").hasRole("ADMIN")
-                    .requestMatchers(HttpMethod.PUT, "/product/**").hasRole("ADMIN")
+                    .requestMatchers(HttpMethod.POST, "/product", "/category").hasRole("ADMIN")
+                    .requestMatchers(HttpMethod.DELETE, "/product/**", "/category/**").hasRole("ADMIN")
+                    .requestMatchers(HttpMethod.PUT, "/product/**", "/category/**").hasRole("ADMIN")
                     .anyRequest().authenticated()
                 )
                 .build();
