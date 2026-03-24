@@ -42,7 +42,7 @@ public class SecurityConfig {
                     // Standaard boilerplate code
                     .requestMatchers("/error").anonymous()
                     // Hieronder de endpoints waar iedereen zonder inlog of registratie iets mee mag doen
-                    .requestMatchers(HttpMethod.GET, "product", "product/**").permitAll()
+                    .requestMatchers(HttpMethod.GET, "/product", "/product/**").permitAll()
                     .anyRequest().authenticated()
                 )
                 .build();
