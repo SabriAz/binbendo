@@ -3,6 +3,7 @@ package com.informatica.infirfs_2026.config;
 import com.informatica.infirfs_2026.services.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -36,18 +37,24 @@ public class SecurityConfig {
                 .userDetailsService(userService)
                 .addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests((auth) -> auth
+                    // Iedereen mag inloggen en registreren
                     .requestMatchers("/auth/**").permitAll()
+                    // Standaard boilerplate code
                     .requestMatchers("/error").anonymous()
+                    // Hieronder de endpoints waar iedereen zonder inlog of registratie iets mee mag doen
+                    .requestMatchers(HttpMethod.GET, "product", "product/**").permitAll()
                     .anyRequest().authenticated()
                 )
                 .build();
     }
 
+    //Encode de passwords zodat niemand deze in kan zien wanneer opgeslagen
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+    // Manier om daadwerklijk bij de user te kunnen komen die geauthenticeerd is
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();

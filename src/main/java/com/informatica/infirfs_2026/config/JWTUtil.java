@@ -18,7 +18,7 @@ public class JWTUtil {
     private String secret;
 
     public String generateToken(String email) throws IllegalArgumentException, JWTCreationException {
-
+        // JWT token aanmaken aan de hand van de user informatie en onze JWT secret
         return JWT.create()
                 .withSubject("User Details")
                 .withClaim("email", email)
@@ -27,7 +27,7 @@ public class JWTUtil {
                 .withIssuer("Duck Studios")
                 .sign(Algorithm.HMAC256(secret));
     }
-
+    // Manier om de JWT token te valideren aan de hand van wanneer hij is gegeven, of hij door ons is gegeven etc.
     public String validateTokenAndRetrieveSubject(String token) throws JWTVerificationException {
         JWTVerifier verifier = JWT.require(Algorithm.HMAC256(secret))
                 .withSubject("User Details")
@@ -36,7 +36,7 @@ public class JWTUtil {
         DecodedJWT jwt = verifier.verify(token);
         return jwt.getClaim("email").asString();
     }
-
+    // Manier om te zorgen dat de JWT token een gelimiteerde tijd heeft om geldig gebruikt te worden
     private Date createExpirationDate(){
         int expirationHours = 6;
         Calendar appendableDate = Calendar.getInstance();

@@ -23,7 +23,10 @@ public class JWTFilter extends OncePerRequestFilter {
         this.userService = userService;
         this.jwtTokenUtil = jwtTokenUtil;
     }
-
+    // Deze functie checkt of de JWT token bestaat, of hij leeg is, etc.
+    // Wanneer niet valid, bad request
+    // Wanneer wel valid, user details inladen en hij geeft een authenticated user teruggeven die valid is zolang de api draait
+    // Als er toch nog iets mis gaat krijgt gebruiker 401, met de bijbehorende message
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String authHeader = request.getHeader("Authorization");
