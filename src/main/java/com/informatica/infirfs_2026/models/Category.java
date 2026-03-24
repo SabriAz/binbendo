@@ -1,5 +1,6 @@
 package com.informatica.infirfs_2026.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -16,7 +17,8 @@ public class Category {
 
     private String name;
 
-    @OneToMany
+    @OneToMany (mappedBy = "category")
+    @JsonManagedReference
     private List<Product> products;
 
     public Category() {

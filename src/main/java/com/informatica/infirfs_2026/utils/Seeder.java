@@ -21,17 +21,20 @@ public class Seeder {
 
     @EventListener
     public void seed(ContextRefreshedEvent event) {
-        Product product1 = new Product("Nintendo switch 2", "De gloednieuwe console waar je op wacht", 499.99);
-        Product product2 = new Product("Nintendo switch", "De super oude console die je iets minder graag wil", 299.99);
-
-        this.productRepository.save(product1);
-        this.productRepository.save(product2);
-
         Category category1 = new Category("Consoles");
         Category category2 = new Category("Games");
 
         this.categoryRepository.save(category1);
         this.categoryRepository.save(category2);
+
+        Product product1 = new Product("Nintendo switch 2", "De gloednieuwe console waar je op wacht", 499.99, category1);
+        Product product2 = new Product("Zelda: Breath of the Wild", "De super mooie zelda game alleen op Nintendo Swtich", 69.99, category2);
+
+
+        this.productRepository.save(product1);
+        this.productRepository.save(product2);
+
+
 
     }
 }

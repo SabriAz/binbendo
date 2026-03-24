@@ -1,9 +1,7 @@
 package com.informatica.infirfs_2026.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.*;
 
 @Entity
 public class Product {
@@ -16,14 +14,16 @@ public class Product {
     private String description;
     private double price;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JsonBackReference
     private Category category;
 
 
-    public Product(String name, String description, double price) {
+    public Product(String name, String description, double price, Category category) {
         this.name = name;
         this.description = description;
         this.price = price;
+        this.category = category;
     }
 
     public Product() {}
@@ -59,6 +59,14 @@ public class Product {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }
 

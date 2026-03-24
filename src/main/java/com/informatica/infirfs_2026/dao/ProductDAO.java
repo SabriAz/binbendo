@@ -1,6 +1,7 @@
 package com.informatica.infirfs_2026.dao;
 
 import com.informatica.infirfs_2026.dto.ProductDTO;
+import com.informatica.infirfs_2026.models.Category;
 import com.informatica.infirfs_2026.models.Product;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
@@ -12,9 +13,11 @@ import java.util.Optional;
 @Component
 public class ProductDAO {
     private final ProductRepository productRepository;
+    private final CategoryRepository categoryRepository;
 
-    public ProductDAO(ProductRepository productRepository) {
+    public ProductDAO(ProductRepository productRepository, CategoryRepository categoryRepository) {
         this.productRepository = productRepository;
+        this.categoryRepository = categoryRepository;
     }
 
     public List<Product> getAllProducts(){
@@ -24,8 +27,20 @@ public class ProductDAO {
     }
 
     public void createProduct(ProductDTO productDTO) {
-        Product product = new Product(productDTO.name, productDTO.description, productDTO.price);
-        this.productRepository.save(product);
+        Optional<Category> optionalCategory = this.categoryRepository.findById(productDTO.categoryId);
+        if (optionalCategory.isPresent()) {
+            Category category = optionalCategory.get();
+            Product product = new Product(
+                    productDTO.name,
+                    productDTO.description,
+                    productDTO.price,
+                    category
+            );
+            this.productRepository.save(product);
+        }else{
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Category id not found");
+        }
+
     }
 
     public void updateProduct(long id, ProductDTO productDTO) {

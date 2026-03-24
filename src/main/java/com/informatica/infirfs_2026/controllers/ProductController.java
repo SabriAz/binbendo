@@ -32,7 +32,7 @@ public class ProductController {
     @PutMapping("/{id}")
     public ResponseEntity<String> updateProduct(@PathVariable long id, @RequestBody ProductDTO productDTO) {
         this.productDAO.updateProduct(id, productDTO);
-        return ResponseEntity.ok("Updated product with id" + id);
+        return ResponseEntity.ok("Updated product with id " + id);
     }
 
 }
