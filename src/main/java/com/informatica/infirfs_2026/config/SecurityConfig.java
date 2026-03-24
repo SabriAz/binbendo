@@ -7,6 +7,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -41,8 +42,14 @@ public class SecurityConfig {
                     .requestMatchers("/auth/**").permitAll()
                     // Standaard boilerplate code
                     .requestMatchers("/error").anonymous()
+
                     // Hieronder de endpoints waar iedereen zonder inlog of registratie iets mee mag doen
-                    .requestMatchers(HttpMethod.GET, "/product", "/product/**").permitAll()
+                    .requestMatchers(HttpMethod.GET, "/product", "/product/**", "/category", "/category/**").permitAll()
+
+                    // Hieronder de enpoints waar alleen admins bij mogen
+                    .requestMatchers(HttpMethod.POST, "/product", "/category").hasRole("ADMIN")
+                    .requestMatchers(HttpMethod.DELETE, "/product/**", "/category/**").hasRole("ADMIN")
+                    .requestMatchers(HttpMethod.PUT, "/product/**", "/category/**").hasRole("ADMIN")
                     .anyRequest().authenticated()
                 )
                 .build();

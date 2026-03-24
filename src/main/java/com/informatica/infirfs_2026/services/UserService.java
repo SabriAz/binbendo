@@ -26,6 +26,6 @@ public class UserService implements UserDetailsService {
         CustomUser customUser = userRepository.findByEmail(email);
         return new User(email,
                 customUser.getPassword(),
-                Collections.singleton(new SimpleGrantedAuthority("ROLE_USER")));
+                Collections.singleton(new SimpleGrantedAuthority(customUser.getRole().name())));
     }
 }

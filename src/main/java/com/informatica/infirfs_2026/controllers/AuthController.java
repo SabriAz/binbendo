@@ -5,6 +5,7 @@ import com.informatica.infirfs_2026.dao.UserRepository;
 import com.informatica.infirfs_2026.dto.AuthenticationDTO;
 import com.informatica.infirfs_2026.dto.LoginResponse;
 import com.informatica.infirfs_2026.models.CustomUser;
+import com.informatica.infirfs_2026.models.Role;
 import com.informatica.infirfs_2026.services.CredentialValidator;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -58,7 +59,7 @@ public class AuthController {
         }
         String encodedPassword = passwordEncoder.encode(authenticationDTO.password);
 
-        CustomUser registerdCustomUser = new CustomUser(authenticationDTO.email, encodedPassword);
+        CustomUser registerdCustomUser = new CustomUser(authenticationDTO.email, encodedPassword, Role.ROLE_USER);
         userDAO.save(registerdCustomUser);
         String token = jwtUtil.generateToken(registerdCustomUser.getEmail());
         LoginResponse loginResponse = new LoginResponse(registerdCustomUser.getEmail(), token);
