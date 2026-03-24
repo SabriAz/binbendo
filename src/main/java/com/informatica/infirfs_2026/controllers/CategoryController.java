@@ -27,4 +27,10 @@ public class CategoryController {
         this.categoryDAO.createCategory(categoryDTO);
         return ResponseEntity.ok("Category created");
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<String> updateCategory(@PathVariable long id, @RequestBody CategoryDTO categoryDTO) {
+        this.categoryDAO.updateCategory(id, categoryDTO);
+        return ResponseEntity.ok("Category updated with id " + id);
+    }
 }
