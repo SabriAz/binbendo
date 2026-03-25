@@ -1,5 +1,6 @@
 package com.informatica.infirfs_2026.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity(name = "custom_user")
@@ -16,7 +17,8 @@ public class CustomUser {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @OneToOne(mappedBy = "customUser")
+    @JsonBackReference
+    @OneToOne(mappedBy = "customUser", cascade = CascadeType.ALL)
     private Cart cart;
 
     public CustomUser(String email, String password, Role role) {
