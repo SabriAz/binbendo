@@ -16,6 +16,9 @@ public class CustomUser {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    @OneToOne(mappedBy = "customUser")
+    private Cart cart;
+
     public CustomUser(String email, String password, Role role) {
         this.email = email;
         this.password = password;
@@ -54,5 +57,13 @@ public class CustomUser {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public Cart getCart() {
+        return cart;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
     }
 }
