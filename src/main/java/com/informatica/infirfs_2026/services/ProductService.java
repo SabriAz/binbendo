@@ -1,5 +1,7 @@
-package com.informatica.infirfs_2026.dao;
+package com.informatica.infirfs_2026.services;
 
+import com.informatica.infirfs_2026.dao.CategoryRepository;
+import com.informatica.infirfs_2026.dao.ProductRepository;
 import com.informatica.infirfs_2026.dto.ProductDTO;
 import com.informatica.infirfs_2026.models.Category;
 import com.informatica.infirfs_2026.models.Product;
@@ -11,11 +13,11 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-public class ProductDAO {
+public class ProductService {
     private final ProductRepository productRepository;
     private final CategoryRepository categoryRepository;
 
-    public ProductDAO(ProductRepository productRepository, CategoryRepository categoryRepository) {
+    public ProductService(ProductRepository productRepository, CategoryRepository categoryRepository) {
         this.productRepository = productRepository;
         this.categoryRepository = categoryRepository;
     }

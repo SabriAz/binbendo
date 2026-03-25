@@ -1,5 +1,6 @@
-package com.informatica.infirfs_2026.dao;
+package com.informatica.infirfs_2026.services;
 
+import com.informatica.infirfs_2026.dao.CategoryRepository;
 import com.informatica.infirfs_2026.dto.CategoryDTO;
 import com.informatica.infirfs_2026.models.Category;
 import org.springframework.stereotype.Component;
@@ -8,10 +9,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-public class CategoryDAO {
+public class CategoryService {
     private final CategoryRepository categoryRepository;
 
-    public CategoryDAO(CategoryRepository categoryRepository) {
+    public CategoryService(CategoryRepository categoryRepository) {
         this.categoryRepository = categoryRepository;
     }
 
