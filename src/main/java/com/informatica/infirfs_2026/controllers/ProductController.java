@@ -23,6 +23,12 @@ public class ProductController {
         return ResponseEntity.ok(products);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Product> getProductById(@PathVariable long id) {
+        Product product = this.productDAO.getProductById(id);
+        return ResponseEntity.ok(product);
+    }
+
     @PostMapping
     public ResponseEntity<String> addProduct(@RequestBody ProductDTO productDTO) {
         this.productDAO.createProduct(productDTO);

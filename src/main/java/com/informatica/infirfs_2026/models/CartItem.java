@@ -1,9 +1,6 @@
 package com.informatica.infirfs_2026.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 
 @Entity
 public class CartItem {
@@ -14,6 +11,10 @@ public class CartItem {
 
     @ManyToOne
     private Cart cart;
+
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
 
 
 }

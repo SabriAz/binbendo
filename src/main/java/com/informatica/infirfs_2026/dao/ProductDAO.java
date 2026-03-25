@@ -26,6 +26,15 @@ public class ProductDAO {
         return products;
     }
 
+    public Product getProductById(long id){
+        Optional<Product> product = productRepository.findById(id);
+        if(product.isPresent()){
+            return product.get();
+        }else {
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+    }
+
     public void createProduct(ProductDTO productDTO) {
         Optional<Category> optionalCategory = this.categoryRepository.findById(productDTO.categoryId);
         if (optionalCategory.isPresent()) {
