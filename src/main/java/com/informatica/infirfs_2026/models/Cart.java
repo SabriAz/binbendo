@@ -20,7 +20,11 @@ public class Cart {
     @OneToMany(mappedBy = "cart")
     private List<CartItem> items;
 
-    private double totalPrice;
+    // Variable | Function for live total price
+    public double getTotalPrice() {
+        return items.stream()
+                .mapToDouble(item -> item.getProduct().getPrice() * item.getQuantity()).sum();
+    }
 
     public Cart() {}
 

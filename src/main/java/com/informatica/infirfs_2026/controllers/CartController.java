@@ -40,6 +40,12 @@ public class CartController {
     @PatchMapping("/{id}")
     public ResponseEntity<String> updateQuantityCartItem(@PathVariable long id, @RequestBody PatchCartItemDTO patchCartItemDTO) {
         this.cartService.updateQuantityCartItem(id, patchCartItemDTO);
-        return ResponseEntity.ok("Quantity of product updated");
+        return ResponseEntity.ok("Updated quantity of cart item with id " + id);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteCartItem (@PathVariable long id) {
+        this.cartService.deleteCartItem(id);
+        return ResponseEntity.ok("Deleted cart item with id " + id);
     }
 }

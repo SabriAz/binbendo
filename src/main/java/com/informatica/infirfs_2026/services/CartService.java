@@ -44,7 +44,6 @@ public class CartService {
         } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found");
         }
-
     }
 
     // Used for the patch mapping in cart controller for changing quantity of specific cart item
@@ -60,5 +59,12 @@ public class CartService {
         } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found");
         }
+    }
+
+    public void deleteCartItem(long id) {
+        if (!this.cartItemRepository.existsById(id)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found");
+        }
+        this.cartItemRepository.deleteById(id);
     }
 }
