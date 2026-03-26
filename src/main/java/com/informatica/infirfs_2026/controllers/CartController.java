@@ -1,6 +1,7 @@
 package com.informatica.infirfs_2026.controllers;
 
 import com.informatica.infirfs_2026.dto.CartItemDTO;
+import com.informatica.infirfs_2026.dto.PatchCartItemDTO;
 import com.informatica.infirfs_2026.models.Cart;
 import com.informatica.infirfs_2026.models.CustomUser;
 import com.informatica.infirfs_2026.models.Product;
@@ -34,6 +35,13 @@ public class CartController {
         Cart cart = getCurrentUserCart();
         this.cartService.addProductToCart(cart, cartItemDTO);
         return ResponseEntity.ok("Product added to cart");
+
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<String> updateQuantityCartItem(@PathVariable long id, @RequestBody PatchCartItemDTO patchCartItemDTO) {
+        this.cartService.updateQuantityCartItem(id, patchCartItemDTO);
+        return ResponseEntity.ok("Quantity of product updated");
 
     }
 

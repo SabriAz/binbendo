@@ -1,6 +1,7 @@
 package com.informatica.infirfs_2026.services;
 
 import com.informatica.infirfs_2026.dao.CategoryRepository;
+import com.informatica.infirfs_2026.dao.ProductRepository;
 import com.informatica.infirfs_2026.dto.CategoryDTO;
 import com.informatica.infirfs_2026.models.Category;
 import org.springframework.http.HttpStatus;
@@ -13,9 +14,11 @@ import java.util.Optional;
 @Component
 public class CategoryService {
     private final CategoryRepository categoryRepository;
+    private final ProductRepository productRepository;
 
-    public CategoryService(CategoryRepository categoryRepository) {
+    public CategoryService(CategoryRepository categoryRepository, ProductRepository productRepository) {
         this.categoryRepository = categoryRepository;
+        this.productRepository = productRepository;
     }
 
     public List<Category> getAllCategories() {
@@ -40,6 +43,9 @@ public class CategoryService {
     public void deleteCategoryById(long id) {
         if (!this.categoryRepository.existsById(id)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Category not found");
+        }
+        else if (this.productRepository.existsByCategoryId(id)) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Category still has products");
         }
         this.categoryRepository.deleteById(id);
     }

@@ -4,6 +4,7 @@ package com.informatica.infirfs_2026.services;
 import com.informatica.infirfs_2026.dao.CartItemRepository;
 import com.informatica.infirfs_2026.dao.ProductRepository;
 import com.informatica.infirfs_2026.dto.CartItemDTO;
+import com.informatica.infirfs_2026.dto.PatchCartItemDTO;
 import com.informatica.infirfs_2026.models.Cart;
 import com.informatica.infirfs_2026.models.CartItem;
 import com.informatica.infirfs_2026.models.Product;
@@ -35,4 +36,15 @@ public class CartService {
 
     }
 
+    // Used for the patch mapping in cart controller for changing quantity of specific cart item
+    public void updateQuantityCartItem(long id, PatchCartItemDTO patchCartItemDTO) {
+        Optional<CartItem> optionalCartItem = cartItemRepository.findById(id);
+        if (optionalCartItem.isPresent()) {
+            CartItem cartitem = optionalCartItem.get();
+            cartitem.setQuantity(patchCartItemDTO.quantity);
+            cartItemRepository.save(cartitem);
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found");
+        }
+    }
 }
