@@ -3,7 +3,9 @@ package com.informatica.infirfs_2026.services;
 import com.informatica.infirfs_2026.dao.CategoryRepository;
 import com.informatica.infirfs_2026.dto.CategoryDTO;
 import com.informatica.infirfs_2026.models.Category;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
@@ -25,7 +27,7 @@ public class CategoryService {
         this.categoryRepository.save(category);
     }
 
-    public void updateCategory(long id, CategoryDTO categoryDTO) {
+    public void updateCategoryById(long id, CategoryDTO categoryDTO) {
         Optional<Category> optionalCategory = categoryRepository.findById(id);
         if (optionalCategory.isPresent()) {
             Category updatedCategory = optionalCategory.get();
@@ -33,5 +35,12 @@ public class CategoryService {
 
         }
 
+    }
+
+    public void deleteCategoryById(long id) {
+        if (!this.categoryRepository.existsById(id)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Category not found");
+        }
+        this.categoryRepository.deleteById(id);
     }
 }

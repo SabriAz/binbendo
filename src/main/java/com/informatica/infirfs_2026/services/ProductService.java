@@ -54,7 +54,7 @@ public class ProductService {
 
     }
 
-    public void updateProduct(long id, ProductDTO productDTO) {
+    public void updateProductById(long id, ProductDTO productDTO) {
         Optional<Product> optionalProduct = this.productRepository.findById(id);
         if (optionalProduct.isPresent()) {
             Product updatedProduct = optionalProduct.get();
@@ -71,5 +71,12 @@ public class ProductService {
         }
 
 
+    }
+
+    public void deleteProductById(long id) {
+        if (!this.productRepository.existsById(id)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+        this.productRepository.deleteById(id);
     }
 }

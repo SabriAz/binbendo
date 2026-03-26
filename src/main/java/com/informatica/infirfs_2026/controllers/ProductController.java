@@ -37,8 +37,14 @@ public class ProductController {
 
     @PutMapping("/{id}")
     public ResponseEntity<String> updateProduct(@PathVariable long id, @RequestBody ProductDTO productDTO) {
-        this.productService.updateProduct(id, productDTO);
+        this.productService.updateProductById(id, productDTO);
         return ResponseEntity.ok("Updated product with id " + id);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteProduct(@PathVariable long id) {
+        this.productService.deleteProductById(id);
+        return ResponseEntity.ok("Deleted product with id " + id);
     }
 
 }
