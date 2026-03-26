@@ -35,9 +35,8 @@ public class CategoryService {
         if (optionalCategory.isPresent()) {
             Category updatedCategory = optionalCategory.get();
             updatedCategory.setName(categoryDTO.name);
-
+            this.categoryRepository.save(updatedCategory);
         }
-
     }
 
     public void deleteCategoryById(long id) {
