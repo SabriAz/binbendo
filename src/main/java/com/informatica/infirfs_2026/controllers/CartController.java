@@ -3,17 +3,10 @@ package com.informatica.infirfs_2026.controllers;
 import com.informatica.infirfs_2026.dto.CartItemDTO;
 import com.informatica.infirfs_2026.dto.PatchCartItemDTO;
 import com.informatica.infirfs_2026.models.Cart;
-import com.informatica.infirfs_2026.models.CustomUser;
-import com.informatica.infirfs_2026.models.Product;
-import com.informatica.infirfs_2026.models.Role;
 import com.informatica.infirfs_2026.services.CartService;
-import com.informatica.infirfs_2026.services.UserService;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
-import java.util.List;
 
 @RestController
 @RequestMapping("/cart")

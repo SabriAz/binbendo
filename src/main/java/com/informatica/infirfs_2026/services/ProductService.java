@@ -22,22 +22,30 @@ public class ProductService {
         this.categoryRepository = categoryRepository;
     }
 
+    //Check if there is any products to fetch before returning list to user
     public List<Product> getAllProducts(){
-        List<Product> products;
-        products = this.productRepository.findAll();
-        return products;
+        if (productRepository.findAll().isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, " No products found");
+        }
+
+        return this.productRepository.findAll();
     }
 
+    // Checking if product exists before returning product info to user
     public Product getProductById(long id){
         Optional<Product> product = productRepository.findById(id);
         if(product.isPresent()){
             return product.get();
         }else {
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found");
         }
     }
 
+    // Checking if price is greater than 0 to make product and if category exists before making new product
     public void createProduct(ProductDTO productDTO) {
+        if (productDTO.price <= 0) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Price must be greater than 0");
+        }
         Optional<Category> optionalCategory = this.categoryRepository.findById(productDTO.categoryId);
         if (optionalCategory.isPresent()) {
             Category category = optionalCategory.get();
@@ -49,12 +57,15 @@ public class ProductService {
             );
             this.productRepository.save(product);
         }else{
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Category id not found");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Category not found");
         }
-
     }
 
+    // Checking if price is greater than 0, category exists and if product is found in the first place
     public void updateProductById(long id, ProductDTO productDTO) {
+        if (productDTO.price <= 0) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Price must be greater than 0");
+        }
         Optional<Product> optionalProduct = this.productRepository.findById(id);
         if (optionalProduct.isPresent()) {
             Product updatedProduct = optionalProduct.get();
@@ -63,14 +74,15 @@ public class ProductService {
             updatedProduct.setDescription(productDTO.description);
             updatedProduct.setPrice(productDTO.price);
 
+            if (categoryRepository.findById(productDTO.categoryId).isPresent()) {
+                updatedProduct.setCategory(categoryRepository.findById(productDTO.categoryId).get());
+            } else {
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Category not found");
+            }
             this.productRepository.save(updatedProduct);
         }else{
-            throw new ResponseStatusException(
-                    HttpStatus.NOT_FOUND, "Product id not found"
-            );
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Product id not found");
         }
-
-
     }
 
     public void deleteProductById(long id) {

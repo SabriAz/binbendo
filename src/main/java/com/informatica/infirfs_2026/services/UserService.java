@@ -30,6 +30,7 @@ public class UserService implements UserDetailsService {
                 Collections.singleton(new SimpleGrantedAuthority(customUser.getRole().name())));
     }
 
+    //Helper function for fetching user using current email
     public CustomUser getUserByEmail() {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         CustomUser customUser = userRepository.findByEmail(email);

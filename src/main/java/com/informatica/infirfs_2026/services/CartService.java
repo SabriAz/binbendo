@@ -24,6 +24,8 @@ public class CartService {
         this.userService = userService;
     }
 
+    // Getting cart by user email, if user is admin they cant use cart
+    // Admin accounts should mainly be used for admin panel, this way admin account cant be abused
     public Cart getCartByUser() {
         CustomUser customUser = this.userService.getUserByEmail();
         if (customUser.getRole() == Role.ROLE_ADMIN) {
@@ -32,7 +34,8 @@ public class CartService {
         return customUser.getCart();
     }
 
-
+    // Adding products to the cart, again quantity has to be more than 0 or else totalPrice can be negative
+    // Gets authorized in Security Config
     public void addProductToCart(Cart cart, CartItemDTO cartItemDTO) {
         if (cartItemDTO.quantity <= 0) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Quantity must be greater than 0");
@@ -47,6 +50,8 @@ public class CartService {
     }
 
     // Used for the patch mapping in cart controller for changing quantity of specific cart item
+    // Quantity cant be the same as current quantity or <=0 for invalid quantity checks
+    // Also a user check to see if cart item belongs to said user
     public void updateQuantityCartItem(long id, PatchCartItemDTO patchCartItemDTO) {
         if (patchCartItemDTO.quantity <= 0) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Quantity must be greater than 0");
@@ -69,6 +74,7 @@ public class CartService {
         }
     }
 
+    // Deletes specific cart item from cart if exists and if cart item actually belongs to user
     public void deleteCartItem(long id) {
         Optional<CartItem> optionalCartItem = cartItemRepository.findById(id);
         if (optionalCartItem.isEmpty()) {
@@ -82,6 +88,7 @@ public class CartService {
         this.cartItemRepository.deleteById(id);
     }
 
+    // Clears all cart items from Cart, gets authorized in Security Config
     public void clearCart() {
         Cart cart = getCartByUser();
         this.cartItemRepository.deleteAll(cart.getItems());

@@ -22,9 +22,11 @@ public class CategoryService {
     }
 
     public List<Category> getAllCategories() {
-        return categoryRepository.findAll();
+        return this.categoryRepository.findAll();
     }
 
+    // Admin endpoints : Create, update and delete category
+    // Authorization gets checked through SecurityConfig
     public void createCategory(CategoryDTO categoryDTO) {
         Category category = new Category(categoryDTO.name);
         this.categoryRepository.save(category);
@@ -39,6 +41,8 @@ public class CategoryService {
         }
     }
 
+    // Deleting category means either cascading all the products that has a link to it or having all products remapped to other categories or deleted before the category can get deleted
+    // For this, the check if category has products linked to it
     public void deleteCategoryById(long id) {
         if (!this.categoryRepository.existsById(id)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Category not found");
