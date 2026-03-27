@@ -4,6 +4,7 @@ package com.informatica.infirfs_2026.services;
 import com.informatica.infirfs_2026.dao.UserRepository;
 import com.informatica.infirfs_2026.models.CustomUser;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -27,5 +28,12 @@ public class UserService implements UserDetailsService {
         return new User(email,
                 customUser.getPassword(),
                 Collections.singleton(new SimpleGrantedAuthority(customUser.getRole().name())));
+    }
+
+    //Helper function for fetching user using current email
+    public CustomUser getUserByEmail() {
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        CustomUser customUser = userRepository.findByEmail(email);
+        return customUser;
     }
 }

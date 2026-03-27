@@ -19,7 +19,7 @@ public class Seeder {
     private final CategoryRepository categoryRepository;
     private final UserRepository userRepository;
 
-    // PasswordEncoder nodig om een admin user te seeden, zonder de encoder komt het password als plain tekst in de db te staan, dan werkt inloggen niet en het is onveilig.
+    // PasswordEncoder nodig om een admin user te seeden, zonder de encoder komt het password als plain tekst in de db te staan, dan werkt inloggen niet + het is onveilig.
     private final PasswordEncoder passwordEncoder;
 
     public Seeder(

@@ -4,6 +4,7 @@ import com.informatica.infirfs_2026.config.JWTUtil;
 import com.informatica.infirfs_2026.dao.UserRepository;
 import com.informatica.infirfs_2026.dto.AuthenticationDTO;
 import com.informatica.infirfs_2026.dto.LoginResponse;
+import com.informatica.infirfs_2026.models.Cart;
 import com.informatica.infirfs_2026.models.CustomUser;
 import com.informatica.infirfs_2026.models.Role;
 import com.informatica.infirfs_2026.services.CredentialValidator;
@@ -60,6 +61,8 @@ public class AuthController {
         String encodedPassword = passwordEncoder.encode(authenticationDTO.password);
 
         CustomUser registerdCustomUser = new CustomUser(authenticationDTO.email, encodedPassword, Role.ROLE_USER);
+        Cart cart = new Cart(registerdCustomUser);
+        registerdCustomUser.setCart(cart);
         userDAO.save(registerdCustomUser);
         String token = jwtUtil.generateToken(registerdCustomUser.getEmail());
         LoginResponse loginResponse = new LoginResponse(registerdCustomUser.getEmail(), token);
