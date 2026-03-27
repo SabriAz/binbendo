@@ -53,17 +53,31 @@ public class CartService {
         }
         Optional<CartItem> optionalCartItem = cartItemRepository.findById(id);
         if (optionalCartItem.isPresent()) {
-            CartItem cartitem = optionalCartItem.get();
-            cartitem.setQuantity(patchCartItemDTO.quantity);
-            cartItemRepository.save(cartitem);
+
+            CartItem cartItem = optionalCartItem.get();
+            CustomUser customUser = this.userService.getUserByEmail();
+            if (cartItem.getCart().getCustomUser().getId() != customUser.getId()) {
+                throw new ResponseStatusException(HttpStatus.FORBIDDEN, "This cart item does not belong to you");
+            }
+            else if (cartItem.getQuantity() == patchCartItemDTO.quantity) {
+                throw new ResponseStatusException(HttpStatus.CONFLICT, "Quantity is already " + patchCartItemDTO.quantity);
+            }
+            cartItem.setQuantity(patchCartItemDTO.quantity);
+            cartItemRepository.save(cartItem);
         } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found");
         }
     }
 
     public void deleteCartItem(long id) {
-        if (!this.cartItemRepository.existsById(id)) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found");
+        Optional<CartItem> optionalCartItem = cartItemRepository.findById(id);
+        if (optionalCartItem.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Cart item not found");
+        }
+        CartItem cartItem = optionalCartItem.get();
+        CustomUser customUser = this.userService.getUserByEmail();
+        if (cartItem.getCart().getCustomUser().getId() != customUser.getId()) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "This cart item does not belong to you");
         }
         this.cartItemRepository.deleteById(id);
     }
