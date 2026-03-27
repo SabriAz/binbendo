@@ -48,4 +48,10 @@ public class CartController {
         this.cartService.deleteCartItem(id);
         return ResponseEntity.ok("Deleted cart item with id " + id);
     }
+
+    @DeleteMapping
+    public ResponseEntity<String> clearCart() {
+        this.cartService.clearCart();
+        return ResponseEntity.ok("Deleted all cart items");
+    }
 }

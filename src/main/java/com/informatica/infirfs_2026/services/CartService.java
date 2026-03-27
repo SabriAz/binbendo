@@ -67,4 +67,9 @@ public class CartService {
         }
         this.cartItemRepository.deleteById(id);
     }
+
+    public void clearCart() {
+        Cart cart = getCartByUser();
+        this.cartItemRepository.deleteAll(cart.getItems());
+    }
 }
