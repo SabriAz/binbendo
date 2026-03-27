@@ -25,9 +25,8 @@ public class ProductService {
     //Check if there is any products to fetch before returning list to user
     public List<Product> getAllProducts(){
         if (productRepository.findAll().isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, " No products found");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No products found");
         }
-
         return this.productRepository.findAll();
     }
 

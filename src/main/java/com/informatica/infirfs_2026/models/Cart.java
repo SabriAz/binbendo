@@ -1,6 +1,6 @@
 package com.informatica.infirfs_2026.models;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -16,7 +16,7 @@ public class Cart {
     @JoinColumn(name = "user_id")
     private CustomUser customUser;
 
-    @JsonManagedReference
+    @JsonBackReference
     @OneToMany(mappedBy = "cart")
     private List<CartItem> items;
 
