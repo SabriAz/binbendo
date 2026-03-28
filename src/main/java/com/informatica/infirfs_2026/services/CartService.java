@@ -89,7 +89,7 @@ public class CartService {
 
         CustomUser customUser = this.userService.getUserByEmail();
         if (cartItem.getCart().getCustomUser().getId() != customUser.getId()) {
-            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "This cart item is not belong to you");
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "This cart item does not belong to you");
         }
 
         cartItemRepository.delete(cartItem);
