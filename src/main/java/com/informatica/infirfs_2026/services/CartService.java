@@ -10,8 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.Optional;
-
 @Component
 public class CartService {
     private final ProductRepository productRepository;
@@ -49,13 +47,6 @@ public class CartService {
                 cartItemDTO.quantity);
 
         this.cartItemRepository.save(cartItem);
-//        Optional<Product> product = productRepository.findById(cartItemDTO.productId);
-//        if (product.isPresent()) {
-//            CartItem cartItem = new CartItem(cart, product.get(), cartItemDTO.quantity);
-//            cartItemRepository.save(cartItem);
-//        } else {
-//            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found");
-//        }
     }
 
     // Used for the patch mapping in cart controller for changing quantity of specific cart item

@@ -1,9 +1,6 @@
 package com.informatica.infirfs_2026.controllers;
 
-import com.informatica.infirfs_2026.models.Cart;
 import com.informatica.infirfs_2026.models.Order;
-import com.informatica.infirfs_2026.models.OrderItem;
-import com.informatica.infirfs_2026.services.CartService;
 import com.informatica.infirfs_2026.services.OrderService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,11 +11,9 @@ import java.util.List;
 @RequestMapping("/order")
 public class OrderController {
     private final OrderService orderService;
-    private final CartService cartService;
 
-    public OrderController(OrderService orderService, CartService cartService) {
+    public OrderController(OrderService orderService) {
         this.orderService = orderService;
-        this.cartService = cartService;
     }
 
     @GetMapping
@@ -35,8 +30,7 @@ public class OrderController {
 
     @PostMapping
     public ResponseEntity<String> placeOrder() {
-        Order newOrder = this.orderService.placeOrder();
+        this.orderService.placeOrder();
         return ResponseEntity.ok("Order placed successfully");
-
     }
 }
