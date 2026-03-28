@@ -1,5 +1,6 @@
 package com.informatica.infirfs_2026.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -12,6 +13,7 @@ public class OrderItem {
     @GeneratedValue
     private long id;
 
+    @JsonBackReference
     @ManyToOne
     private Order order;
 
