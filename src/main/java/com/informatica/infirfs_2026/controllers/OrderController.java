@@ -3,10 +3,7 @@ package com.informatica.infirfs_2026.controllers;
 import com.informatica.infirfs_2026.models.Order;
 import com.informatica.infirfs_2026.services.OrderService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,7 +23,7 @@ public class OrderController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Order> getOrderById(@RequestParam long id) {
+    public ResponseEntity<Order> getOrderById(@PathVariable long id) {
         Order order = this.orderService.getOrderById(id);
         return ResponseEntity.ok(order);
     }

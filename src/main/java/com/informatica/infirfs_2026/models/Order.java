@@ -4,8 +4,10 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
+@Table(name = "orders")
 public class Order {
 
     @Id
@@ -20,4 +22,55 @@ public class Order {
     private Date date;
 
     private double totalPrice;
+
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    private List<OrderItem> orderItems;
+
+    public Order(CustomUser customUser, Date date, double totalPrice) {
+        this.customUser = customUser;
+        this.date = date;
+        this.totalPrice = totalPrice;
+    }
+
+    public Order() {}
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public CustomUser getCustomUser() {
+        return customUser;
+    }
+
+    public void setCustomUser(CustomUser customUser) {
+        this.customUser = customUser;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public List<OrderItem> getOrderItems() {
+        return orderItems;
+    }
+
+    public void setOrderItems(List<OrderItem> orderItems) {
+        this.orderItems = orderItems;
+    }
 }

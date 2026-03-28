@@ -30,11 +30,12 @@ public class OrderService {
     }
 
     public Order getOrderById(long id) {
-        Optional<Order> order = this.orderRepository.findById(id);
-        if (order.isPresent()) {
-            return order.get();
-        } else {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Order not found");
+        Order order = this.orderRepository.findById(id).
+                orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Order not found"));
+        CustomUser customUser = this.userService.getUserByEmail();
+        if (order.getCustomUser().getId() != customUser.getId()) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "This order does not belong to you");
         }
+        return order;
     }
 }
