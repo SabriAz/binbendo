@@ -37,4 +37,10 @@ public class OrderService {
         }
         return order;
     }
+
+
+    public Order placeOrder() {
+        CustomUser customUser = this.userService.getUserByEmail();
+
+    }
 }

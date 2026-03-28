@@ -2,6 +2,7 @@ package com.informatica.infirfs_2026.controllers;
 
 import com.informatica.infirfs_2026.models.Cart;
 import com.informatica.infirfs_2026.models.Order;
+import com.informatica.infirfs_2026.models.OrderItem;
 import com.informatica.infirfs_2026.services.CartService;
 import com.informatica.infirfs_2026.services.OrderService;
 import org.springframework.http.ResponseEntity;
@@ -33,8 +34,9 @@ public class OrderController {
     }
 
     @PostMapping
-    public ResponseEntity<Order> createOrder(@RequestBody Order order) {
-        Cart cart = this.cartService.getCartByUser();
-        Order newOrder = this.orderService.createOrder();
+    public ResponseEntity<String> placeOrder() {
+        Order newOrder = this.orderService.placeOrder();
+        return ResponseEntity.ok("Order placed successfully");
+
     }
 }
