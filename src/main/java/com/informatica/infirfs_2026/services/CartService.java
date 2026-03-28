@@ -40,52 +40,59 @@ public class CartService {
         if (cartItemDTO.quantity <= 0) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Quantity must be greater than 0");
         }
-        Optional<Product> product = productRepository.findById(cartItemDTO.productId);
-        if (product.isPresent()) {
-            CartItem cartItem = new CartItem(cart, product.get(), cartItemDTO.quantity);
-            cartItemRepository.save(cartItem);
-        } else {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found");
-        }
+        Product product = this.productRepository.findById(cartItemDTO.productId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found"));
+
+        CartItem cartItem = new CartItem(
+                cart,
+                product,
+                cartItemDTO.quantity);
+
+        this.cartItemRepository.save(cartItem);
+//        Optional<Product> product = productRepository.findById(cartItemDTO.productId);
+//        if (product.isPresent()) {
+//            CartItem cartItem = new CartItem(cart, product.get(), cartItemDTO.quantity);
+//            cartItemRepository.save(cartItem);
+//        } else {
+//            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found");
+//        }
     }
 
     // Used for the patch mapping in cart controller for changing quantity of specific cart item
     // Quantity cant be the same as current quantity or <=0 for invalid quantity checks
     // Also a user check to see if cart item belongs to said user
     public void updateQuantityCartItem(long id, PatchCartItemDTO patchCartItemDTO) {
-        if (patchCartItemDTO.quantity <= 0) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Quantity must be greater than 0");
-        }
-        Optional<CartItem> optionalCartItem = cartItemRepository.findById(id);
-        if (optionalCartItem.isPresent()) {
+        CartItem cartItem = cartItemRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cart item not found"));
 
-            CartItem cartItem = optionalCartItem.get();
-            CustomUser customUser = this.userService.getUserByEmail();
-            if (cartItem.getCart().getCustomUser().getId() != customUser.getId()) {
-                throw new ResponseStatusException(HttpStatus.FORBIDDEN, "This cart item does not belong to you");
-            }
-            else if (cartItem.getQuantity() == patchCartItemDTO.quantity) {
-                throw new ResponseStatusException(HttpStatus.CONFLICT, "Quantity is already " + patchCartItemDTO.quantity);
-            }
-            cartItem.setQuantity(patchCartItemDTO.quantity);
-            cartItemRepository.save(cartItem);
-        } else {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found");
-        }
-    }
-
-    // Deletes specific cart item from cart if exists and if cart item actually belongs to user
-    public void deleteCartItem(long id) {
-        Optional<CartItem> optionalCartItem = cartItemRepository.findById(id);
-        if (optionalCartItem.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Cart item not found");
-        }
-        CartItem cartItem = optionalCartItem.get();
         CustomUser customUser = this.userService.getUserByEmail();
         if (cartItem.getCart().getCustomUser().getId() != customUser.getId()) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "This cart item does not belong to you");
         }
-        this.cartItemRepository.deleteById(id);
+
+        if (patchCartItemDTO.quantity <= 0) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Quantity must be greater than 0");
+        }
+
+        if (patchCartItemDTO.quantity == cartItem.getQuantity()) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Quantity is already " + patchCartItemDTO.quantity);
+        }
+
+        cartItem.setQuantity(patchCartItemDTO.quantity);
+        this.cartItemRepository.save(cartItem);
+    }
+
+    // Deletes specific cart item from cart if exists and if cart item actually belongs to user
+    public void deleteCartItem(long id) {
+        CartItem cartItem = cartItemRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cart item not found"));
+
+        CustomUser customUser = this.userService.getUserByEmail();
+        if (cartItem.getCart().getCustomUser().getId() != customUser.getId()) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "This cart item is not belong to you");
+        }
+
+        cartItemRepository.delete(cartItem);
     }
 
     // Clears all cart items from Cart, gets authorized in Security Config
