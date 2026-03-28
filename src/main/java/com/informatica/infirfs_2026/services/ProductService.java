@@ -36,6 +36,18 @@ public class ProductService {
                 orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found"));
     }
 
+    // Gets products by category for filtering categories in the website
+    // Checks if category exists and if category has any products
+    public List<Product> getProductsByCategory(Long categoryId) {
+        this.categoryRepository.findById(categoryId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Category not found"));
+        List<Product> products = this.productRepository.findByCategoryId(categoryId);
+        if (products.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No products found for this category");
+        }
+        return products;
+    }
+
     // Checking if price is greater than 0 to make product and if category exists before making new product
     public void createProduct(ProductDTO productDTO) {
         if (productDTO.price <= 0) {
