@@ -33,6 +33,7 @@ public class OrderService {
         this.cartItemRepository = cartItemRepository;
     }
 
+    //Checks if user is admin cause admins should
     public List<Order> getOrdersByUser() {
         CustomUser customUser = this.userService.getUserByEmail();
         if (customUser.getRole() == Role.ROLE_ADMIN) {
@@ -41,6 +42,8 @@ public class OrderService {
         return customUser.getOrders();
     }
 
+    // Gets specific order to show information about order, (items etc.)
+    // Checks if order exists and if order belongs to user fetching data
     public Order getOrderById(long id) {
         Order order = this.orderRepository.findById(id).
                 orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Order not found"));
@@ -51,7 +54,8 @@ public class OrderService {
         return order;
     }
 
-
+    // Places order on current cart of user
+    // Checks if cart contains any items,
     public void placeOrder() {
         CustomUser customUser = this.userService.getUserByEmail();
         Cart cart = this.cartService.getCartByUser();
