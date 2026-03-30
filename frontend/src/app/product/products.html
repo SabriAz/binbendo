@@ -1,12 +1,16 @@
-<section>
-  @for (product of products(); track product.id) {
-    <article class="product-card">
-      <h2>{{ product.name }}</h2>
-      <img [src]="product.imageUrl" [alt]="product.name">
-<!--      <p>{{ product.description }}</p>-->
-      <p>{{ product.price | currency:'EUR' }}</p>
-      <button>In winkelwagen</button>
 
-    </article>
-  }
-</section>
+<div class="shop-layout">
+  <aside class="filters"></aside>
+  <section>
+    @for (product of products(); track product.id) {
+      <article class="product-card">
+        <h2>{{ product.name }}</h2>
+        <img [src]="product.imageUrl" [alt]="product.name">
+  <!--      <p>{{ product.description }}</p>-->
+        <p>{{ product.price | currency:'EUR' }}</p>
+        <button>In winkelwagen</button>
+
+      </article>
+    }
+  </section>
+</div>
