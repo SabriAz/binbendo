@@ -41,10 +41,12 @@ public class Seeder {
         this.userRepository.save(customUser);
 
         Category category1 = new Category("Consoles");
-        Category category2 = new Category("Games");
+        Category category2 = new Category("Zelda Games");
+        Category category3 = new Category("Mario Games");
 
         this.categoryRepository.save(category1);
         this.categoryRepository.save(category2);
+        this.categoryRepository.save(category3);
 
         Product product1 = new Product(
                 "Nintendo Switch 2",
@@ -79,21 +81,21 @@ public class Seeder {
                 "Het avontuurlijke verhaal van mario die door werelden vliegt.",
                 59.99,
                 "/assets/images/super_mario_odyssey.png",
-                category2
+                category3
         );
         Product product6 = new Product(
                 "Super Smash Bros",
                 "Vechten met mario en andere Nintendo karakters.",
                 59.99,
                 "/assets/images/super_smash_bros.png",
-                category2
+                category3
         );
         Product product7 = new Product(
                 "Mario kart 8 Deluxe",
                 "De ultieme racing game van nintendo om het tegen je vrienden op te nemen.",
                 69.99,
                 "/assets/images/mario_kart_8_deluxe.png",
-                category2
+                category3
         );
 
         this.productRepository.save(product1);
