@@ -6,6 +6,7 @@ public class ProductDTO {
     public String name;
     public String description;
     public double price;
+    public String imageUrl;
 
     @JsonAlias("category_id")
     public long categoryId;

@@ -13,16 +13,18 @@ public class Product {
     private String name;
     private String description;
     private double price;
+    private String imageUrl;
 
     @ManyToOne(cascade = CascadeType.MERGE)
     @JsonBackReference
     private Category category;
 
 
-    public Product(String name, String description, double price, Category category) {
+    public Product(String name, String description, double price, String imageUrl, Category category) {
         this.name = name;
         this.description = description;
         this.price = price;
+        this.imageUrl = imageUrl;
         this.category = category;
     }
 
@@ -67,6 +69,14 @@ public class Product {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }
 

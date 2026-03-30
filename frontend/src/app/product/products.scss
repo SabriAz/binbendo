@@ -3,6 +3,7 @@ section {
   grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
   padding: 2rem;
+  padding-left: 20rem;
 }
 .product-card {
   background: #fff;
@@ -11,6 +12,40 @@ section {
   box-shadow: 0 0.25rem 0.75rem rgba(0,0,0,0.1);
   border-top: 0.25rem solid #e4000f;
   transition: transform 0.25s ease, background-color 0.25s ease;
+  width: 85%;
+
+  h2 {
+    display: flex;
+    justify-content: center;
+  }
+
+  img {
+    width: 100%;
+    height: 15rem;
+    object-fit: contain;
+    border-radius: 0.5rem;
+  }
+
+  p {
+    font-size: 1.25rem;
+  }
+
+  button {
+    border-radius: 1rem;
+    cursor: pointer;
+    background: #e4000f;
+    color: white;
+    padding: 0.5rem 1rem;
+    width: 100%;
+    font-weight: bold;
+    font-size: 1.5rem;
+    transition: background-color 0.25s ease;
+
+    &:hover {
+      background-color: #b8000c;
+    }
+  }
+
 
   &:hover {
     transform: translateY(-0.5rem);

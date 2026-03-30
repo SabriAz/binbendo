@@ -50,42 +50,49 @@ public class Seeder {
                 "Nintendo Switch 2",
                 "De gloednieuwe console waar je op wacht.",
                 499.99,
+                "/assets/images/nintendo_switch_2.png",
                 category1
         );
         Product product2 = new Product(
                 "Nintendo Switch Original",
                 "De super mooie zelda game alleen op Nintendo Swtich.",
                 69.99,
+                "/assets/images/nintendo_switch_original.png",
                 category1
         );
         Product product3 = new Product(
                 "Nintendo Switch Lite",
                 "De lichte versie van de oude vertrouwde original Switch die je al kent.",
                 499.99,
+                "/assets/images/nintendo_switch_lite.png",
                 category1
         );
         Product product4 = new Product(
                 "Zelda: Breath of the Wild",
                 "De super mooie zelda game alleen op Nintendo Swtich.",
                 69.99,
+                "/assets/images/zelda_breath_of_the_wild.png",
                 category2
         );
         Product product5 = new Product(
                 "Super Mario Odyssey",
                 "Het avontuurlijke verhaal van mario die door werelden vliegt.",
                 59.99,
+                "/assets/images/super_mario_odyssey.png",
                 category1
         );
         Product product6 = new Product(
                 "Super Smash Bros",
                 "Vechten met mario en andere Nintendo karakters.",
                 59.99,
+                "/assets/images/super_smash_bros.png",
                 category2
         );
         Product product7 = new Product(
                 "Mario kart 8 Deluxe",
                 "De ultieme racing game van nintendo om het tegen je vrienden op te nemen.",
                 69.99,
+                "/assets/images/mario_kart_8_deluxe.png",
                 category2
         );
 

@@ -59,6 +59,7 @@ public class ProductService {
                 productDTO.name,
                 productDTO.description,
                 productDTO.price,
+                productDTO.imageUrl,
                 category
         );
         productRepository.save(product);
