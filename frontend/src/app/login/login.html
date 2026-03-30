@@ -1,1 +1,10 @@
-<p>login works!</p>
+<div class="login-container">
+  <h2>Inloggen</h2>
+  <input type="email" [(ngModel)]="email" placeholder="E-mailadres">
+  <input type="password" [(ngModel)]="password" placeholder="Wachtwoord">
+  <button (click)="login()">Log in</button>
+  <p>
+    Dont have an account yet?
+    <a routerLink="/register">Register here!</a>
+  </p>
+</div>
