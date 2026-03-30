@@ -6,7 +6,7 @@
     <h3>Categorieën</h3>
     <ul>
       @for (category of categories(); track category.id) {
-        <li (click)="filterByCategory(category.id)">{{ category.name }}</li>
+        <li (click)="toggleCategories(category.id)">{{ category.name }}</li>
       }
     </ul>
   </aside>
