@@ -1,1 +1,24 @@
-<p>register works!</p>
+<div class = register-page>
+  <div class="register-container">
+    <h2>Register</h2>
+    <input type="email" [(ngModel)]="email" placeholder="E-mailadres">
+    <input type="password" [(ngModel)]="password" (ngModelChange)="checkPassword()" placeholder="Wachtwoord">
+    <button (click)="register()" [disabled]="!email || !password || !allRequirementsMet()">Register</button>
+    @if (errorMessage) {
+      <p class="error">{{ errorMessage }}</p>
+    }
+    <p>
+      Heb je al een account?
+      <a routerLink="/login">Log in hier!</a>
+    </p>
+    <ul class="requirements">
+      <p>Wachtwoord vereisten:</p>
+      <li [class.valid]="passwordRequirements.length">Minimaal 8 karakters</li>
+      <li [class.valid]="passwordRequirements.digit">Minimaal 1 cijfer</li>
+      <li [class.valid]="passwordRequirements.lowercase">Minimaal 1 kleine letter</li>
+      <li [class.valid]="passwordRequirements.uppercase">Minimaal 1 hoofdletter</li>
+      <li [class.valid]="passwordRequirements.special">Minimaal 1 speciale karakter</li>
+      <li [class.valid]="passwordRequirements.noSpaces">Geen spaties</li>
+    </ul>
+  </div>
+</div>

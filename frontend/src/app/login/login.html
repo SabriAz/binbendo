@@ -1,10 +1,14 @@
+<div class="login-page"></div>
 <div class="login-container">
   <h2>Inloggen</h2>
   <input type="email" [(ngModel)]="email" placeholder="E-mailadres">
   <input type="password" [(ngModel)]="password" placeholder="Wachtwoord">
-  <button (click)="login()">Log in</button>
+  <button (click)="login()" [disabled]="!email || !password">Log in</button>
+  @if (errorMessage) {
+    <p class="error">{{ errorMessage }}</p>
+  }
   <p>
-    Dont have an account yet?
-    <a routerLink="/register">Register here!</a>
+    Heb je nog geen account?
+    <a routerLink="/register">Registreer hier!</a>
   </p>
 </div>

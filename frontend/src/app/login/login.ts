@@ -13,15 +13,21 @@ export class Login {
   email = '';
   password = '';
 
+  errorMessage = '';
+
   constructor(
     private authService: AuthService,
     private router: Router,
   ) {}
 
   login(): void {
-    this.authService.login({ email: this.email, password: this.password }).subscribe((response) => {
+    this.authService.login({ email: this.email, password: this.password }).subscribe({
+    next: (response) => {
       localStorage.setItem('token', response.token);
       this.router.navigate(['/']);
+    },
+      error: () => {this.errorMessage = 'E-mailadres of wachtwoord klopt niet';
+      }
     });
   }
 }

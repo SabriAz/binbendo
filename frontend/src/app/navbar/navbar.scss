@@ -2,12 +2,13 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
+  padding: 0.5rem 2rem;
   background-color: #e4000f;
+  border-radius: 5rem;
 
   .brand {
     align-self: start;
-    font-size: 3.5rem;
+    font-size: 3rem;
     font-weight: bolder;
   }
 
@@ -22,6 +23,6 @@ nav {
   a {
     color: white;
     text-decoration: none;
-    font-size: 2.5rem;
+    font-size: 2.25rem;
   }
 }
