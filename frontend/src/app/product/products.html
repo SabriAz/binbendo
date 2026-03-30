@@ -1,1 +1,29 @@
-<p>products works!</p>
+
+<div class="shop-layout">
+  <aside class="filters">
+    <h3>Zoeken op Producten</h3>
+    <input type = "text" (input)="searchQuery.set($any($event.target).value)" placeholder="Zoeken...">
+    <hr>
+    <h3>Filter op Categorieën</h3>
+    <ul>
+      @for (category of categories(); track category.id) {
+        <li
+          (click)="toggleCategories(category.id)"
+          [class.active]="selectedCategories().includes(category.id)">
+          {{ category.name }}
+        </li>
+      }
+    </ul>
+  </aside>
+  <section>
+    @for (product of filteredProducts(); track product.id) {
+      <article class="product-card">
+        <h2>{{ product.name }}</h2>
+        <img [src]="product.imageUrl" [alt]="product.name">
+  <!--      <p>{{ product.description }}</p>-->
+        <p>{{ product.price | currency:'EUR' }}</p>
+        <button>+ In winkelwagen</button>
+      </article>
+    }
+  </section>
+</div>

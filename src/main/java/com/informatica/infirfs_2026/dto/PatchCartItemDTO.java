@@ -1,6 +1,6 @@
 package com.informatica.infirfs_2026.dto;
 
-// DTO puur alleen gebruikt om quantity binnen de winkelwagen aan te passen
+// DTO only for changing quantity of product / cart item in cart
 public class PatchCartItemDTO {
     public int quantity;
 }

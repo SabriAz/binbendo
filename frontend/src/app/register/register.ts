@@ -1,9 +1,58 @@
 import { Component } from '@angular/core';
+import { AuthService } from '../services/auth.service';
+import { Router, RouterLink } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
-  imports: [],
+  imports: [FormsModule, RouterLink],
   templateUrl: './register.html',
   styleUrl: './register.scss',
 })
-export class Register {}
+export class Register {
+  email = '';
+  password = '';
+
+  errorMessage = '';
+
+  passwordRequirements = {
+    length: false,
+    digit: false,
+    lowercase: false,
+    uppercase: false,
+    special: false,
+    noSpaces: true
+  }
+
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+  ) {}
+
+  register(): void {
+    this.authService.register({ email: this.email, password: this.password }).subscribe({
+      next: (response) => {
+        localStorage.setItem('token', response.token);
+        this.router.navigate(['/']);
+      },
+      error: () => {
+        this.errorMessage = 'E-mailadres klopt niet!';
+      },
+    });
+  }
+
+  checkPassword(): void {
+    this.passwordRequirements = {
+      length: this.password.length >= 8 && this.password.length <= 30,
+      digit: /\d/.test(this.password),
+      lowercase: /[a-z]/.test(this.password),
+      uppercase: /[A-Z]/.test(this.password),
+      special: /[^a-zA-Z0-9]/.test(this.password),
+      noSpaces: !/\s/.test(this.password),
+    }
+  }
+
+  allRequirementsMet(): boolean {
+    return Object.values(this.passwordRequirements).every(requirement => requirement)
+  }
+}

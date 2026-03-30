@@ -33,7 +33,7 @@ public class OrderService {
         this.cartItemRepository = cartItemRepository;
     }
 
-    //Checks if user is admin cause admins should
+    //Checks if user is admin cause admins should not be able to use this function
     public List<Order> getOrdersByUser() {
         CustomUser customUser = this.userService.getUserByEmail();
         if (customUser.getRole() == Role.ROLE_ADMIN) {

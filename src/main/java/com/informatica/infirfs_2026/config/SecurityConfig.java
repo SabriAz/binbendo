@@ -16,6 +16,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.List;
 
 @Configuration
 @EnableWebSecurity
@@ -38,15 +43,15 @@ public class SecurityConfig {
                 .userDetailsService(userService)
                 .addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests((auth) -> auth
-                    // Iedereen mag inloggen en registreren
+                    // Everyone may login and register
                     .requestMatchers("/auth/**").permitAll()
-                    // Standaard boilerplate code
+                    // Standard boilerplate code
                     .requestMatchers("/error").anonymous()
 
-                    // Hieronder de endpoints waar iedereen zonder inlog of registratie iets mee mag doen
+                    // These are endpoints everyone has access to, no token needed
                     .requestMatchers(HttpMethod.GET, "/product", "/product/**", "/category", "/category/**").permitAll()
 
-                    // Hieronder de enpoints waar alleen admins bij mogen
+                    // These are endpoints only admins can access
                     .requestMatchers(HttpMethod.POST, "/product", "/category").hasRole("ADMIN")
                     .requestMatchers(HttpMethod.DELETE, "/product/**", "/category/**").hasRole("ADMIN")
                     .requestMatchers(HttpMethod.PUT, "/product/**", "/category/**").hasRole("ADMIN")
@@ -55,13 +60,26 @@ public class SecurityConfig {
                 .build();
     }
 
-    //Encode de passwords zodat niemand deze in kan zien wanneer opgeslagen
+    // Cors configuration so angular frontend has rights to calling all the endpoints
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(List.of("http://localhost:4200"));
+        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE"));
+        configuration.setAllowedHeaders(List.of("*"));
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
+
+    //Encodes passwords so no one can see them when saved
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-    // Manier om daadwerklijk bij de user te kunnen komen die geauthenticeerd is
+    // Basically an easy way to get to the authenticated user
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();

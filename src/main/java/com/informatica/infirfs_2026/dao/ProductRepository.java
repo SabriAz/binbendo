@@ -8,8 +8,10 @@ import java.util.List;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
-    //Checken of categories gelinked is aan producten voordat admin verwijderd
+    //Checks if categories is linked to any products before admin deletes it
     boolean existsByCategoryId(long id);
 
     List<Product> findByCategoryId(Long categoryId);
+
+    List<Product> findByCategoryIdIn(List<Long> categoryIds);
 }

@@ -37,6 +37,8 @@ public class AuthController {
         this.validator = validator;
     }
 
+    // Register checks email, password and if everything is right it encodes the password and writes user to db
+    // Lastly gives token
     @PostMapping("/register")
     public ResponseEntity<LoginResponse> register(@RequestBody AuthenticationDTO authenticationDTO) {
         if (!validator.isValidEmail(authenticationDTO.email)) {
@@ -69,6 +71,8 @@ public class AuthController {
         return ResponseEntity.ok(loginResponse);
     }
 
+    // Login gives token if email and encoded password match
+    // If not, no token, no access
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> login(@RequestBody AuthenticationDTO body) {
         try {

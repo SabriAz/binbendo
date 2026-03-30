@@ -1,0 +1,28 @@
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 2rem;
+  background-color: #e4000f;
+  border-radius: 5rem;
+
+  .brand {
+    align-self: start;
+    font-size: 3rem;
+    font-weight: bolder;
+  }
+
+  .nav-left {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+
+  a {
+    color: white;
+    text-decoration: none;
+    font-size: 2.25rem;
+  }
+}
