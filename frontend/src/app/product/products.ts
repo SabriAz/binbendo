@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, computed, OnInit } from '@angular/core';
 import { ProductService } from '../services/product.service';
 import { CategoryService } from '../services/category.service';
 import { Product } from '../models/product.model';
@@ -17,6 +17,8 @@ export class Products implements OnInit {
   categories = signal<Category[]>([]);
   selectedCategories = signal<number[]>([]);
 
+  searchQuery = signal('');
+
   constructor(private productService: ProductService, private categoryService: CategoryService) {}
 
   toggleCategories(id: number) {
@@ -34,6 +36,10 @@ export class Products implements OnInit {
       this.productService.getProductsByCategories(this.selectedCategories()).subscribe(data => this.products.set(data)) //ofzo
     }
   }
+
+  filteredProducts = computed(() =>
+  this.products().filter(p =>
+  p.name.toLowerCase().includes(this.searchQuery().toLowerCase())))
 
   ngOnInit(): void {
     this.productService.getAllProducts().subscribe((data) => this.products.set(data));
