@@ -46,14 +46,55 @@ public class Seeder {
         this.categoryRepository.save(category1);
         this.categoryRepository.save(category2);
 
-        Product product1 = new Product("Nintendo switch 2", "De gloednieuwe console waar je op wacht", 499.99, category1);
-        Product product2 = new Product("Zelda: Breath of the Wild", "De super mooie zelda game alleen op Nintendo Swtich", 69.99, category2);
-
+        Product product1 = new Product(
+                "Nintendo Switch 2",
+                "De gloednieuwe console waar je op wacht.",
+                499.99,
+                category1
+        );
+        Product product2 = new Product(
+                "Nintendo Switch Original",
+                "De super mooie zelda game alleen op Nintendo Swtich.",
+                69.99,
+                category1
+        );
+        Product product3 = new Product(
+                "Nintendo Switch Lite",
+                "De lichte versie van de oude vertrouwde original Switch die je al kent.",
+                499.99,
+                category1
+        );
+        Product product4 = new Product(
+                "Zelda: Breath of the Wild",
+                "De super mooie zelda game alleen op Nintendo Swtich.",
+                69.99,
+                category2
+        );
+        Product product5 = new Product(
+                "Super Mario Odyssey",
+                "Het avontuurlijke verhaal van mario die door werelden vliegt.",
+                59.99,
+                category1
+        );
+        Product product6 = new Product(
+                "Super Smash Bros",
+                "Vechten met mario en andere Nintendo karakters.",
+                59.99,
+                category2
+        );
+        Product product7 = new Product(
+                "Mario kart 8 Deluxe",
+                "De ultieme racing game van nintendo om het tegen je vrienden op te nemen.",
+                69.99,
+                category2
+        );
 
         this.productRepository.save(product1);
         this.productRepository.save(product2);
-
-
-
+        this.productRepository.save(product3);
+        this.productRepository.save(product4);
+        this.productRepository.save(product5);
+        this.productRepository.save(product6);
+        this.productRepository.save(product7);
     }
 }
