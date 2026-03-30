@@ -9,5 +9,5 @@ import { Navbar } from './navbar/navbar';
   styleUrl: './app.scss',
 })
 export class App {
-  protected readonly title = signal('frontend');
+  protected readonly title = signal('Binbendo');
 }
