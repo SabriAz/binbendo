@@ -9,9 +9,13 @@ import { Product } from '../models/product.model';
 export class ProductService {
   private apiUrl = 'http://localhost:8080/api/product';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  getProducts(): Observable<Product[]> {
+  getAllProducts(): Observable<Product[]> {
     return this.http.get<Product[]>(`${this.apiUrl}`);
+  }
+
+  getProductsByCategory(id: number): Observable<Product[]> {
+    return this.http.get<Product[]>(`${this.apiUrl}/category/${id}`);
   }
 }

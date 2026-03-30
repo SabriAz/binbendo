@@ -79,7 +79,7 @@ public class Seeder {
                 "Het avontuurlijke verhaal van mario die door werelden vliegt.",
                 59.99,
                 "/assets/images/super_mario_odyssey.png",
-                category1
+                category2
         );
         Product product6 = new Product(
                 "Super Smash Bros",

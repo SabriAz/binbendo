@@ -1,5 +1,6 @@
 package com.informatica.infirfs_2026.controllers;
 
+import com.informatica.infirfs_2026.models.Category;
 import com.informatica.infirfs_2026.services.ProductService;
 import com.informatica.infirfs_2026.dto.ProductDTO;
 import com.informatica.infirfs_2026.models.Product;
@@ -29,10 +30,12 @@ public class ProductController {
         return ResponseEntity.ok(product);
     }
 
-    @GetMapping("/category/{id}")
-    public ResponseEntity<List<Product>> getProductsByCategory(@PathVariable Long id) {
-        List<Product> categoryProducts = this.productService.getProductsByCategory(id);
-        return ResponseEntity.ok(categoryProducts);
+    // New endpoint for fetching products by categories but this time can send multiple category ids
+    // Old endpoint only had 1 id sent with it so can only get 1 category if filtering
+    @GetMapping("/filter")
+    public ResponseEntity<List<Product>> getProductsByCategories(@RequestParam List<Long> categoryIds) {
+        List<Product> productsByCategories = this.productService.getProductsByCategories(categoryIds);
+        return ResponseEntity.ok(productsByCategories);
     }
 
     @PostMapping

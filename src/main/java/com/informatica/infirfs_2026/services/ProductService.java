@@ -37,7 +37,16 @@ public class ProductService {
     }
 
     // Gets products by category for filtering categories in the website
-    // Checks if category exists and if category has any products
+    // Checks if category exists, if category has no products frontend should handle this, not worth a whole error
+    public List<Product> getProductsByCategories(List<Long> categoryIds) {
+        for (Long id : categoryIds) {
+            categoryRepository.findById(id)
+                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Category not found"));
+        }
+        return productRepository.findByCategoryIdIn(categoryIds);
+    }
+
+
     public List<Product> getProductsByCategory(Long categoryId) {
         this.categoryRepository.findById(categoryId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Category not found"));
