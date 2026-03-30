@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../services/product.service';
 import { Product } from '../models/product.model';
 import { CurrencyPipe } from '@angular/common';
+import {signal} from '@angular/core';
 
 @Component({
   selector: 'app-product',
@@ -10,11 +11,11 @@ import { CurrencyPipe } from '@angular/common';
   styleUrl: './products.scss',
 })
 export class Products implements OnInit {
-  products: Product[] = [];
+  products = signal<Product[]>([]);
 
   constructor(private productService: ProductService) {}
 
   ngOnInit(): void {
-    this.productService.getProducts().subscribe((data) => (this.products = data));
+    this.productService.getProducts().subscribe((data) => (this.products.set(data)));
   }
 }

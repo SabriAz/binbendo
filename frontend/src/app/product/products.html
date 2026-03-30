@@ -1,5 +1,5 @@
 <section>
-  @for (product of products; track product.id) {
+  @for (product of products(); track product.id) {
     <article class="product-card">
       <h2>{{ product.name }}</h2>
       <p>{{ product.description }}</p>
