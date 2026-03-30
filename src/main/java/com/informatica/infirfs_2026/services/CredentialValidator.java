@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-// Service die valideerd of de email echt een mail is en of de password sterk genoeg / oke is om te gebruiken.
+// Service that validates whether the email is in email format and if password is strong enough
 @Service
 public class CredentialValidator {
     public boolean isValidPassword(String password) {

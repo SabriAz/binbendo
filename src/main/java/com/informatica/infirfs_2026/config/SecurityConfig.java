@@ -43,15 +43,15 @@ public class SecurityConfig {
                 .userDetailsService(userService)
                 .addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests((auth) -> auth
-                    // Iedereen mag inloggen en registreren
+                    // Everyone may login and register
                     .requestMatchers("/auth/**").permitAll()
-                    // Standaard boilerplate code
+                    // Standard boilerplate code
                     .requestMatchers("/error").anonymous()
 
-                    // Hieronder de endpoints waar iedereen zonder inlog of registratie iets mee mag doen
+                    // These are endpoints everyone has access to, no token needed
                     .requestMatchers(HttpMethod.GET, "/product", "/product/**", "/category", "/category/**").permitAll()
 
-                    // Hieronder de enpoints waar alleen admins bij mogen
+                    // These are endpoints only admins can access
                     .requestMatchers(HttpMethod.POST, "/product", "/category").hasRole("ADMIN")
                     .requestMatchers(HttpMethod.DELETE, "/product/**", "/category/**").hasRole("ADMIN")
                     .requestMatchers(HttpMethod.PUT, "/product/**", "/category/**").hasRole("ADMIN")
@@ -60,7 +60,7 @@ public class SecurityConfig {
                 .build();
     }
 
-    // Cors configuration zodat de angular frontend alle rechten heeft om endpoints op te roepen
+    // Cors configuration so angular frontend has rights to calling all the endpoints
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
@@ -73,13 +73,13 @@ public class SecurityConfig {
         return source;
     }
 
-    //Encode de passwords zodat niemand deze in kan zien wanneer opgeslagen
+    //Encodes passwords so no one can see them when saved
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-    // Manier om daadwerklijk bij de user te kunnen komen die geauthenticeerd is
+    // Basically an easy way to get to the authenticated user
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
