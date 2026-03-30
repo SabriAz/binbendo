@@ -8,9 +8,48 @@
     min-width: 15rem;
     background: #fff;
     border-radius: 0.75rem;
+    border: 2px solid #666;
     padding: 1.5rem;
-    box-shadow: 0 0.25rem 0.75rem rgba(0,0,0,0.1);
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1);
     height: fit-content;
+    text-align: center;
+
+    input {
+      font-size: 1rem;
+      border-radius: 0.5rem;
+      border: 2px solid #666;
+      padding-left: 0.5rem;
+      margin-bottom: 1.5rem;
+
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+
+      li {
+        cursor: pointer;
+        padding: 0.5rem 1rem;
+        margin-bottom: 0.75rem;
+        border-radius: 0.5rem;
+        border: 2px solid #666;
+        transition: background-color 0.25s ease;
+        font-size: 1.25rem;
+        text-align: center;
+
+
+        &:hover {
+          background-color: #f0f0f0;
+        }
+
+        &.active {
+          background-color: #e4000f;
+          color: white;
+          font-weight: bold;
+        }
+      }
+    }
   }
 }
 

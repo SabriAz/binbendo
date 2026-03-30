@@ -1,12 +1,17 @@
 
 <div class="shop-layout">
   <aside class="filters">
+    <h3>Zoeken op Producten</h3>
     <input type = "text" placeholder="Zoeken...">
-
-    <h3>Categorieën</h3>
+    <hr>
+    <h3>Filter op Categorieën</h3>
     <ul>
       @for (category of categories(); track category.id) {
-        <li (click)="toggleCategories(category.id)">{{ category.name }}</li>
+        <li
+          (click)="toggleCategories(category.id)"
+          [class.active]="selectedCategories().includes(category.id)">
+          {{ category.name }}
+        </li>
       }
     </ul>
   </aside>
