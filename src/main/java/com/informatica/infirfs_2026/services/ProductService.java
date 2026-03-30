@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.Optional;
 
 @Component
 public class ProductService {
@@ -23,22 +22,30 @@ public class ProductService {
     }
 
     //Check if there is any products to fetch before returning list to user
-    public List<Product> getAllProducts(){
-        if (productRepository.findAll().isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, " No products found");
+    public List<Product> getAllProducts() {
+        List<Product> products = productRepository.findAll();
+        if (products.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No products found");
         }
-
-        return this.productRepository.findAll();
+        return products;
     }
 
     // Checking if product exists before returning product info to user
     public Product getProductById(long id){
-        Optional<Product> product = productRepository.findById(id);
-        if(product.isPresent()){
-            return product.get();
-        }else {
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found");
+        return productRepository.findById(id).
+                orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found"));
+    }
+
+    // Gets products by category for filtering categories in the website
+    // Checks if category exists and if category has any products
+    public List<Product> getProductsByCategory(Long categoryId) {
+        this.categoryRepository.findById(categoryId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Category not found"));
+        List<Product> products = this.productRepository.findByCategoryId(categoryId);
+        if (products.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No products found for this category");
         }
+        return products;
     }
 
     // Checking if price is greater than 0 to make product and if category exists before making new product
@@ -46,19 +53,15 @@ public class ProductService {
         if (productDTO.price <= 0) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Price must be greater than 0");
         }
-        Optional<Category> optionalCategory = this.categoryRepository.findById(productDTO.categoryId);
-        if (optionalCategory.isPresent()) {
-            Category category = optionalCategory.get();
-            Product product = new Product(
-                    productDTO.name,
-                    productDTO.description,
-                    productDTO.price,
-                    category
-            );
-            this.productRepository.save(product);
-        }else{
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Category not found");
-        }
+        Category category = categoryRepository.findById(productDTO.categoryId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Category not found"));
+        Product product = new Product(
+                productDTO.name,
+                productDTO.description,
+                productDTO.price,
+                category
+        );
+        productRepository.save(product);
     }
 
     // Checking if price is greater than 0, category exists and if product is found in the first place
@@ -66,28 +69,22 @@ public class ProductService {
         if (productDTO.price <= 0) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Price must be greater than 0");
         }
-        Optional<Product> optionalProduct = this.productRepository.findById(id);
-        if (optionalProduct.isPresent()) {
-            Product updatedProduct = optionalProduct.get();
+        Product product = this.productRepository.findById(id).
+                orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found"));
 
-            updatedProduct.setName(productDTO.name);
-            updatedProduct.setDescription(productDTO.description);
-            updatedProduct.setPrice(productDTO.price);
+        Category category = this.categoryRepository.findById(productDTO.categoryId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Category not found"));
 
-            if (categoryRepository.findById(productDTO.categoryId).isPresent()) {
-                updatedProduct.setCategory(categoryRepository.findById(productDTO.categoryId).get());
-            } else {
-                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Category not found");
-            }
-            this.productRepository.save(updatedProduct);
-        }else{
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Product id not found");
-        }
+        product.setName(productDTO.name);
+        product.setDescription(productDTO.description);
+        product.setPrice(productDTO.price);
+        product.setCategory(category);
+        productRepository.save(product);
     }
 
     public void deleteProductById(long id) {
         if (!this.productRepository.existsById(id)) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found");
         }
         this.productRepository.deleteById(id);
     }

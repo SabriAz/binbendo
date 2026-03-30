@@ -1,7 +1,9 @@
 package com.informatica.infirfs_2026.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity(name = "custom_user")
 public class CustomUser {
@@ -17,9 +19,14 @@ public class CustomUser {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @JsonBackReference
+    @JsonManagedReference
     @OneToOne(mappedBy = "customUser", cascade = CascadeType.ALL)
     private Cart cart;
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "customUser")
+    private List<Order> orders;
+
 
     public CustomUser(String email, String password, Role role) {
         this.email = email;
@@ -67,5 +74,13 @@ public class CustomUser {
 
     public void setCart(Cart cart) {
         this.cart = cart;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
     }
 }

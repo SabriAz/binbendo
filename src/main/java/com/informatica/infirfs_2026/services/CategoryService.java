@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.Optional;
 
 @Component
 public class CategoryService {
@@ -22,7 +21,11 @@ public class CategoryService {
     }
 
     public List<Category> getAllCategories() {
-        return this.categoryRepository.findAll();
+        List<Category> categories = this.categoryRepository.findAll();
+        if (categories.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No categories found");
+        }
+        return categories;
     }
 
     // Admin endpoints : Create, update and delete category
@@ -32,13 +35,13 @@ public class CategoryService {
         this.categoryRepository.save(category);
     }
 
+    //Check if category exists, if it does update the name
     public void updateCategoryById(long id, CategoryDTO categoryDTO) {
-        Optional<Category> optionalCategory = categoryRepository.findById(id);
-        if (optionalCategory.isPresent()) {
-            Category updatedCategory = optionalCategory.get();
-            updatedCategory.setName(categoryDTO.name);
-            this.categoryRepository.save(updatedCategory);
-        }
+        Category category = this.categoryRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Category not found"));
+
+        category.setName(categoryDTO.name);
+        this.categoryRepository.save(category);
     }
 
     // Deleting category means either cascading all the products that has a link to it or having all products remapped to other categories or deleted before the category can get deleted
@@ -47,7 +50,7 @@ public class CategoryService {
         if (!this.categoryRepository.existsById(id)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Category not found");
         }
-        else if (this.productRepository.existsByCategoryId(id)) {
+        if (this.productRepository.existsByCategoryId(id)) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Category still has products");
         }
         this.categoryRepository.deleteById(id);

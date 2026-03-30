@@ -1,5 +1,6 @@
 package com.informatica.infirfs_2026.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
@@ -12,6 +13,7 @@ public class Cart {
     @GeneratedValue
     private long id;
 
+    @JsonBackReference
     @OneToOne
     @JoinColumn(name = "user_id")
     private CustomUser customUser;
