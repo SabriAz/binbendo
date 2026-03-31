@@ -58,7 +58,7 @@ public class Seeder {
         Product product2 = new Product(
                 "Nintendo Switch Original",
                 "De super mooie zelda game alleen op Nintendo Swtich.",
-                69.99,
+                279.99,
                 "/assets/images/nintendo_switch_original.png",
                 category1
         );
