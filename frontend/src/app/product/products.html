@@ -2,8 +2,10 @@
 <div class="shop-layout">
   <aside class="filters">
     <div class="search-wrapper">
-    <h3>Zoeken op Producten</h3>
-    <input type = "text" (input)="searchQuery.set($any($event.target).value)" placeholder="Zoeken...">
+      <h3>Zoeken op Producten</h3>
+      <input type = "text" [value]="searchQuery()" (input)="searchQuery.set($any($event.target).value)" placeholder="Zoeken...">
+      <button class="clear-searchbar-button" [style.visibility]="searchQuery() ? 'visible' : 'hidden'" (click)="clearSearch()">x</button>
+    </div>
     <hr>
     <h3>Filter op Categorieën</h3>
     <ul>
@@ -15,7 +17,9 @@
         </li>
       }
     </ul>
-    </div>
+    @if (selectedCategories().length > 0) {
+      <button class="clear-categories-button" (click)="clearCategories()">x Verwijder filters</button>
+    }
   </aside>
   <section>
     @for (product of filteredProducts(); track product.id) {
