@@ -37,6 +37,15 @@ export class Products implements OnInit {
     }
   }
 
+  clearSearch(): void {
+    this.searchQuery.set('')
+  }
+
+  clearCategories(): void {
+    this.selectedCategories.set([]);
+    this.productService.getAllProducts().subscribe(data => this.products.set(data))
+  }
+
   filteredProducts = computed(() =>
   this.products().filter(p =>
   p.name.toLowerCase().includes(this.searchQuery().toLowerCase())))
