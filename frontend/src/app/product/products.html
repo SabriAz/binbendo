@@ -23,7 +23,7 @@
   </aside>
   <section>
     @for (product of filteredProducts(); track product.id) {
-      <article class="product-card">
+      <article class="product-card" [routerLink]="['/product/', product.id]" ]>
         <h2>{{ product.name }}</h2>
         <img [src]="product.imageUrl" [alt]="product.name">
   <!--      <p>{{ product.description }}</p>-->
