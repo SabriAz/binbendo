@@ -7,4 +7,6 @@
       <p class="price">{{ product()!.price | currency:'EUR'}}</p>
     </div>
   </section>
+} @else {
+  <h1>Product not found!</h1>
 }
