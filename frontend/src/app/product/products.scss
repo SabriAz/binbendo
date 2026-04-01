@@ -1,3 +1,5 @@
+@use '../../styles' as *;
+
 .shop-layout {
   display: flex;
   gap: 2rem;
@@ -6,21 +8,29 @@
   .filters {
     width: 15rem;
     min-width: 15rem;
-    background: #fff;
+    background: white;
     border-radius: 0.75rem;
-    border: 2px solid #666;
+    border: 2px solid $secondary;
     padding: 1.5rem;
-    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1);
+    box-shadow: $shadow;
     height: fit-content;
     text-align: center;
 
     input {
       font-size: 1rem;
       border-radius: 0.5rem;
-      border: 2px solid #666;
+      border: 2px solid $secondary;
       padding-left: 0.5rem;
       margin-bottom: 1.5rem;
 
+    }
+
+    .clear-searchbar-button {
+      background: $secondary;
+      border: none;
+      cursor: pointer;
+      color: white;
+      font-size: 1rem;
     }
 
     ul {
@@ -33,21 +43,39 @@
         padding: 0.5rem 1rem;
         margin-bottom: 0.75rem;
         border-radius: 0.5rem;
-        border: 2px solid #666;
+        border: 2px solid $secondary;
         transition: background-color 0.25s ease;
         font-size: 1.25rem;
         text-align: center;
 
 
         &:hover {
-          background-color: #f0f0f0;
+          background-color: $hover-white;
         }
 
         &.active {
-          background-color: #e4000f;
+          background-color: $primary;
           color: white;
           font-weight: bold;
         }
+      }
+    }
+
+    .clear-categories-button {
+      width: 100%;
+      margin-top: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: none;
+      border: 2px solid $primary;
+      color: $primary;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.25s ease;
+
+      &:hover {
+        background-color: $primary;
+        color: white;
       }
     }
   }
@@ -60,11 +88,11 @@ section {
   gap: 1.5rem;
 }
 .product-card {
-  background: #fff;
+  background: white;
   border-radius: 0.75rem;
   padding: 1.5rem;
-  box-shadow: 0 0.25rem 0.75rem rgba(0,0,0,0.1);
-  border-top: 0.25rem solid #e4000f;
+  box-shadow: $shadow;
+  border-top: 0.25rem solid $primary;
   transition: transform 0.25s ease, background-color 0.25s ease;
 
   h2 {
@@ -79,14 +107,20 @@ section {
     border-radius: 0.5rem;
   }
 
+  .price {
+    font-size: 1.75rem;
+    font-weight: bold;
+  }
+
   p {
     font-size: 1.25rem;
   }
 
   button {
     border-radius: 1rem;
+    border: none;
     cursor: pointer;
-    background: #e4000f;
+    background: $primary;
     color: white;
     padding: 0.5rem 1rem;
     width: 100%;
@@ -95,13 +129,13 @@ section {
     transition: background-color 0.25s ease;
 
     &:hover {
-      background-color: #b8000c;
+      background-color: $primary-dark;
     }
   }
 
 
   &:hover {
     transform: translateY(-0.5rem);
-    background-color: #f0f0f0;
+    background-color: $hover-white;
   }
 }

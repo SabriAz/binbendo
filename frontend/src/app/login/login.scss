@@ -1,3 +1,5 @@
+@use '../../styles' as *;
+
 .login-container {
   display: flex;
   flex-direction: column;
@@ -14,7 +16,7 @@
     width: 20rem;
     padding: 0.75rem 1rem;
     margin-bottom: 1rem;
-    border: 2px solid #666;
+    border: 2px solid $secondary;
     border-radius: 0.5rem;
     font-size: 1rem;
 
@@ -36,12 +38,12 @@
     transition: background-color 0.25s ease;
 
     &:disabled {
-      background-color: #ddd;
+      background-color: $disabled;
       cursor: not-allowed;
     }
 
     &:hover:not(:disabled) {
-      background-color: #b8000c;
+      background-color: $primary-dark;
     }
   }
 
@@ -49,7 +51,7 @@
     margin-top: 1rem;
 
     a {
-      color: #e4000f;
+      color: $primary;
       font-weight: bold;
     }
   }

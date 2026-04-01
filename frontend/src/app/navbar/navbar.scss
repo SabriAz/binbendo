@@ -1,9 +1,11 @@
+@use '../../styles' as *;
+
 nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0.5rem 2rem;
-  background-color: #e4000f;
+  background-color: $primary;
   border-radius: 5rem;
 
   .brand {
