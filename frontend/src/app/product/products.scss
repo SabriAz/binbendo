@@ -1,3 +1,5 @@
+@use '../../styles' as *;
+
 .shop-layout {
   display: flex;
   gap: 2rem;
@@ -21,6 +23,14 @@
       padding-left: 0.5rem;
       margin-bottom: 1.5rem;
 
+    }
+
+    .clear-searchbar-button {
+      background: #666;
+      border: none;
+      cursor: pointer;
+      color: white;
+      font-size: 1rem;
     }
 
     ul {
@@ -50,6 +60,24 @@
         }
       }
     }
+
+    .clear-categories-button {
+      width: 100%;
+      margin-top: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: none;
+      border: 2px solid #e4000f;
+      color: #e4000f;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.25s ease;
+
+      &:hover {
+        background-color: #e4000f;
+        color: white;
+      }
+    }
   }
 }
 
@@ -77,6 +105,11 @@ section {
     height: 15rem;
     object-fit: contain;
     border-radius: 0.5rem;
+  }
+
+  .price {
+    font-size: 1.75rem;
+    font-weight: bold;
   }
 
   p {

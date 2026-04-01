@@ -18,7 +18,7 @@
       }
     </ul>
     @if (selectedCategories().length > 0) {
-      <button class="clear-categories-button" (click)="clearCategories()">x Verwijder filters</button>
+      <button class="clear-categories-button" (click)="clearCategories()">X Verwijder filters</button>
     }
   </aside>
   <section>
@@ -27,7 +27,7 @@
         <h2>{{ product.name }}</h2>
         <img [src]="product.imageUrl" [alt]="product.name">
   <!--      <p>{{ product.description }}</p>-->
-        <p>{{ product.price | currency:'EUR' }}</p>
+        <p class="price">{{ product.price | currency:'EUR' }}</p>
         <button>+ In winkelwagen</button>
       </article>
     }
