@@ -1,0 +1,30 @@
+@if (cart()) {
+  <section class="cart">
+    <h1>Winkelwagen</h1>
+    @for (item of cart()!.items; track item.id) {
+      <div class="cart-item">
+        <img [src]="item.product.imageUrl" [alt]="item.product.name">
+        <div class="info">
+          <h2>{{ item.product.name }}</h2>
+          <p>{{ item.product.price | currency:'EUR' }}</p>
+        </div>
+        <div class="quantity">
+          <button>-</button>
+          <span>{{ item.quantity }}</span>
+          <button>+</button>
+        </div>
+        <p class="subtotal">{{ item.product.price * item.quantity | currency:'EUR' }}</p>
+        <button class="delete-item">Delete</button>
+      </div>
+    }
+    <div class="total">
+      <h2>Totaal: {{ cart()!.totalPrice | currency:'EUR' }}</h2>
+    </div>
+
+  </section>
+}
+
+@else {
+  <h1>Je winkelwagen is leeg!</h1>
+}
+
