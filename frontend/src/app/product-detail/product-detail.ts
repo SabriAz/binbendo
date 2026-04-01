@@ -12,6 +12,7 @@ import { CurrencyPipe } from '@angular/common';
 })
 export class ProductDetail {
   product = signal<Product | null>(null);
+  quantity = signal(1);
 
   constructor(
     private route: ActivatedRoute,

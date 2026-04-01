@@ -6,6 +6,14 @@
       <p class="description">{{ product()!.description }}</p>
       <p class="price">{{ product()!.price | currency:'EUR'}}</p>
     </div>
+    <div class="quantity">
+      <button (click)="quantity() > 1 && quantity.set(quantity() - 1)">-</button>
+      <span>{{ quantity() }}</span>
+      <button (click)="quantity.set(quantity() + 1)">+</button>
+    </div>
+    <div class="add-to-cart-button">
+      <button (click)="this.cartService.addToCart(product()!.id)">Add to cart</button>
+    </div>
   </section>
 }
 
