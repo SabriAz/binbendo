@@ -1,0 +1,103 @@
+@use '../../styles' as *;
+
+.cart {
+  padding: 2rem;
+  max-width: 60rem;
+  margin: 0 auto;
+
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .cart-item {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    background: white;
+    border-radius: 0.75rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: $shadow;
+
+    img {
+      width: 6rem;
+      height: 6rem;
+      object-fit: contain;
+    }
+
+    .info {
+      flex: 1;
+
+      h2 {
+        font-size: 1.25rem;
+      }
+
+      p {
+        color: $secondary;
+      }
+    }
+
+    .quantity {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+
+      button {
+        width: 2rem;
+        height: 2rem;
+        border-radius: 50%;
+        border: 2px solid black;
+        background: none;
+        font-size: 1.25rem;
+        cursor: pointer;
+
+        &:hover {
+          background: $secondary;
+          color: white;
+        }
+      }
+
+      span {
+        font-size: 1.25rem;
+        font-weight: bold;
+        min-width: 1.5rem;
+        text-align: center;
+      }
+    }
+
+    .subtotal {
+      font-size: 1.25rem;
+      font-weight: bold;
+      min-width: 5rem;
+      text-align: right;
+    }
+
+    .delete-item {
+      background: none;
+      border: 2px solid $secondary;
+      color: $secondary;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: all 0.25s ease;
+
+      &:hover {
+        background: $primary;
+        color: white;
+      }
+    }
+  }
+
+  .total {
+    text-align: right;
+    padding: 1rem;
+    border-top: 2px solid $secondary;
+    margin-top: 1rem;
+
+    h2 {
+      font-size: 1.75rem;
+      color: $primary;
+    }
+  }
+}
