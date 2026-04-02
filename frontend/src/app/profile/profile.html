@@ -16,8 +16,28 @@
       } @else {
         @for (order of orders()!; track order.id) {
           <div class="order-card">
-            <span>#{{ order.id }}</span>
-            <span>{{ order.totalPrice | currency:'EUR' }}</span>
+            <div class="order-header" (click)="toggleOrder(order.id)">
+              <span>#{{ order.id }}</span>
+              <span>{{ order.date | date:'dd-MM-yyyy' }}</span>
+              <span>{{ order.totalPrice | currency:'EUR' }}</span>
+              <span class="chevron">{{ expandedOrderId === order.id ? '▲' : '▼' }}</span>
+            </div>
+
+            @if (expandedOrderId === order.id) {
+              <div class="order-items">
+                @if (!orderDetails()[order.id]) {
+                  <p>Laden...</p>
+                } @else {
+                  @for (item of orderDetails()[order.id].orderItems; track item.id) {
+                    <div class="order-item">
+                      <span>{{ item.product.name }}</span>
+                      <span>{{ item.quantity }}x</span>
+                      <span>{{ item.price | currency:'EUR' }}</span>
+                    </div>
+                  }
+                }
+              </div>
+            }
           </div>
         }
       }
