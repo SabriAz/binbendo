@@ -1,1 +1,26 @@
-<p>profile works!</p>
+<section class="profile-page">
+  <div class="profile-card">
+    <div class="avatar">{{ authService.getEmail()[0].toUpperCase() }}</div>
+    <h1>{{ authService.getEmail() }}</h1>
+    <button class="btn-outline" (click)="loadOrders()">Mijn bestellingen</button>
+    <button class="btn-logout" (click)="logout()">Uitloggen</button>
+  </div>
+
+  @if (showOrders) {
+    <div class="orders">
+      <h2>Bestellingen</h2>
+      @if (orders() === null) {
+        <p>Laden...</p>
+      } @else if (orders()!.length === 0) {
+        <p>Je hebt nog geen bestellingen.</p>
+      } @else {
+        @for (order of orders()!; track order.id) {
+          <div class="order-card">
+            <span>#{{ order.id }}</span>
+            <span>{{ order.totalPrice | currency:'EUR' }}</span>
+          </div>
+        }
+      }
+    </div>
+  }
+</section>
