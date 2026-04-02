@@ -100,4 +100,23 @@
       color: $primary;
     }
   }
+
+  .clear-cart {
+    display: block;
+    margin-top: 1.5rem;
+    margin-left: auto;
+    padding: 0.75rem 1.5rem;
+    background: none;
+    border: 2px solid $secondary;
+    color: $secondary;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.25s ease;
+
+    &:hover {
+      background: $secondary;
+      color: white;
+    }
+  }
 }
