@@ -1,58 +1,70 @@
 @use '../../styles' as *;
 
-.login-container {
+.login-page {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  height: 70vh;
+  align-items: center;
+  min-height: 85vh;
 
-  h2 {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-  }
-
-  input {
-    width: 20rem;
-    padding: 0.75rem 1rem;
-    margin-bottom: 1rem;
+  .login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 70vh;
     border: 2px solid $secondary;
-    border-radius: 0.5rem;
-    font-size: 1rem;
+    background-color: white;
+    border-radius: 0.75rem;
+    padding: 2rem;
+    box-shadow: $shadow;
 
-    &:focus {
-      outline: none;
-      border-color: black;
-    }
-  }
-
-  button {
-    width: 20rem;
-    padding: 0.75rem;
-    color: white;
-    border: none;
-    border-radius: 0.5rem;
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.25s ease;
-
-    &:disabled {
-      background-color: $disabled;
-      cursor: not-allowed;
+    h2 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
     }
 
-    &:hover:not(:disabled) {
-      background-color: $primary-dark;
+    input {
+      width: 20rem;
+      padding: 0.75rem 1rem;
+      margin-bottom: 1rem;
+      border: 2px solid $secondary;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+
+      &:focus {
+        outline: none;
+        border-color: black;
+      }
     }
-  }
 
-  p {
-    margin-top: 1rem;
-
-    a {
-      color: $primary;
+    button {
+      width: 20rem;
+      padding: 0.75rem;
+      color: white;
+      border: none;
+      border-radius: 0.5rem;
+      font-size: 1rem;
       font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.25s ease;
+
+      &:disabled {
+        background-color: $disabled;
+        cursor: not-allowed;
+      }
+
+      &:hover:not(:disabled) {
+        background-color: $primary-dark;
+      }
+    }
+
+    p {
+      margin-top: 1rem;
+
+      a {
+        color: $primary;
+        font-weight: bold;
+      }
     }
   }
 }

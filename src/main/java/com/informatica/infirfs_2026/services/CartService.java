@@ -65,10 +65,6 @@ public class CartService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Quantity must be greater than 0");
         }
 
-        if (patchCartItemDTO.quantity == cartItem.getQuantity()) {
-            throw new ResponseStatusException(HttpStatus.CONFLICT, "Quantity is already " + patchCartItemDTO.quantity);
-        }
-
         cartItem.setQuantity(patchCartItemDTO.quantity);
         this.cartItemRepository.save(cartItem);
     }

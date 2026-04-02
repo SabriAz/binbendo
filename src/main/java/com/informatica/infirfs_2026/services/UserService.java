@@ -25,11 +25,13 @@ public class UserService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         CustomUser customUser = userRepository.findByEmail(email);
+        if (customUser == null) {
+            throw new UsernameNotFoundException("User not found: " + email);
+        }
         return new User(email,
                 customUser.getPassword(),
                 Collections.singleton(new SimpleGrantedAuthority(customUser.getRole().name())));
     }
-
     //Helper function for fetching user using current email
     public CustomUser getUserByEmail() {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();

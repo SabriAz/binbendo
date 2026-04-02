@@ -12,11 +12,11 @@
       <button (click)="quantity.set(quantity() + 1)">+</button>
     </div>
     <div class="add-to-cart-button">
-      <button (click)="this.cartService.addToCart(product()!.id)">Add to cart</button>
+      <button (click)="addToCart()">+ Winkelwagen</button>
     </div>
   </section>
 }
 
 @else {
-  <h1>Product not found!</h1>
+  <h1>Product niet gevonden!</h1>
 }

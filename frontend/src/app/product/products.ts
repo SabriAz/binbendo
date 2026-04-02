@@ -39,7 +39,7 @@ export class Products implements OnInit {
     } else {
       this.productService
         .getProductsByCategories(this.selectedCategories())
-        .subscribe((data) => this.products.set(data)); //ofzo
+        .subscribe((data) => this.products.set(data));
     }
   }
 
