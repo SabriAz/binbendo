@@ -19,12 +19,13 @@
     }
     <div class="total">
       <h2>Totaal: {{ cart()!.totalPrice | currency:'EUR' }}</h2>
+      <button class="place-order" (click)="placeOrder()">Bestel</button>
     </div>
     <button class="clear-cart" (click)="clearCart()">Winkelwagen leegmaken</button>
   </section>
 }
 
 @else {
-  <h1>Je winkelwagen is leeg!</h1>
+  <h1 class="cart-empty">Je winkelwagen is leeg!</h1>
 }
 
