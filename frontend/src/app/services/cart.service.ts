@@ -22,14 +22,14 @@ export class CartService {
   }
 
   updateQuantity(cartItemId: number, quantity: number): Observable<any> {
-    return this.http.patch(`${this.apiUrl}/${cartItemId}`, { quantity });
+    return this.http.patch(`${this.apiUrl}/${cartItemId}`, { quantity }, { responseType: 'text' });
   }
 
   deleteCartItem(cartItemId: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/${cartItemId}`);
+    return this.http.delete(`${this.apiUrl}/${cartItemId}`, { responseType: 'text' });
   }
 
   clearCart(): Observable<any> {
-    return this.http.delete(`${this.apiUrl}`);
+    return this.http.delete(`${this.apiUrl}`,  { responseType: 'text' });
   }
 }

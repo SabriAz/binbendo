@@ -17,4 +17,22 @@ export class CartComponent {
   ngOnInit(): void {
     this.cartService.getCart().subscribe((data) => this.cart.set(data));
   }
+
+  updateQuantity(id: number, quantity: number): void {
+    this.cartService.updateQuantity(id, quantity).subscribe(() => {
+      this.cartService.getCart().subscribe((data) => this.cart.set(data));
+    });
+  }
+
+  deleteItem(id: number): void {
+    this.cartService.deleteCartItem(id).subscribe(() => {
+      this.cartService.getCart().subscribe((data) => this.cart.set(data));
+    });
+  }
+
+  clearCart(): void {
+    this.cartService.clearCart().subscribe(() => {
+      this.cart.set(null);
+    });
+  }
 }
