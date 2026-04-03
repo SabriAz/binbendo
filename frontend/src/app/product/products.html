@@ -1,34 +1,34 @@
-
 <div class="shop-layout">
   <aside class="filters">
     <div class="search-input-wrapper">
-      <input type="text" [value]="searchQuery()" (input)="searchQuery.set($any($event.target).value)" placeholder="Zoeken...">
+      <input type="text" [value]="searchQuery()" (input)="searchQuery.set($any($event.target).value)" [placeholder]="'products.search_placeholder' | translate">
       <button class="clear-searchbar-button" [style.visibility]="searchQuery() ? 'visible' : 'hidden'" (click)="clearSearch()">X</button>
     </div>
     <hr>
-    <h3>Filter op Categorieën</h3>
+    <h3>{{ 'products.filter_categories' | translate }}</h3>
     <ul>
       @for (category of categories(); track category.id) {
-        <li
-          (click)="toggleCategories(category.id)"
-          [class.active]="selectedCategories().includes(category.id)">
+        <li (click)="toggleCategories(category.id)" [class.active]="selectedCategories().includes(category.id)">
           {{ category.name }}
         </li>
       }
     </ul>
     @if (selectedCategories().length > 0) {
-      <button class="clear-categories-button" (click)="clearCategories()">X Verwijder filters</button>
+      <button class="clear-categories-button" (click)="clearCategories()">{{ 'products.clear_filters' | translate }}</button>
     }
   </aside>
   <section>
     @for (product of filteredProducts(); track product.id) {
-      <article class="product-card" [routerLink]="['/product/', product.id]" ]>
+      <article class="product-card" [routerLink]="['/product/', product.id]">
         <h2>{{ product.name }}</h2>
         <img [src]="product.imageUrl" [alt]="product.name">
         <hr>
         <p class="price">{{ product.price | currency:'EUR' }}</p>
-        <button>Bekijk product</button>
+        <button>{{ 'products.view_product' | translate }}</button>
       </article>
+    }
+    @empty {
+      <p class="no-results">Geen resultaten gevonden voor "{{ searchQuery() }}"</p>
     }
   </section>
 </div>

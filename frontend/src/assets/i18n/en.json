@@ -1,7 +1,67 @@
 {
   "nav": {
-    "cart": "Shopping cart",
+    "cart": "Shopping Cart",
     "profile": "Profile",
     "login": "Log in"
+  },
+  "login": {
+    "title": "Log In",
+    "email": "Email address",
+    "password": "Password",
+    "button": "Log in",
+    "error": "Email address or password is incorrect",
+    "no_account": "Don't have an account yet?",
+    "register_link": "Register here!"
+  },
+  "register": {
+    "title": "Register",
+    "email": "Email address",
+    "password": "Password",
+    "button": "Register",
+    "error": "Email address is incorrect!",
+    "has_account": "Already have an account?",
+    "login_link": "Log in here!",
+    "requirements": {
+      "title": "Password requirements:",
+      "length": "At least 8 characters",
+      "digit": "At least 1 number",
+      "lowercase": "At least 1 lowercase letter",
+      "uppercase": "At least 1 uppercase letter",
+      "special": "At least 1 special character",
+      "no_spaces": "No spaces"
+    }
+  },
+  "products": {
+    "search_placeholder": "Search...",
+    "filter_categories": "Filter by Categories",
+    "clear_filters": "X Remove filters",
+    "view_product": "View product"
+  },
+  "product_detail": {
+    "not_found": "Product not found!",
+    "add_to_cart": "+ Add to Cart",
+    "added": "✔ Added!"
+  },
+  "cart": {
+    "title": "Shopping Cart",
+    "total": "Total",
+    "order": "Order",
+    "clear": "Clear cart",
+    "empty": "Your shopping cart is empty!",
+    "remove": "Remove",
+    "confirm_delete": "Remove item?",
+    "confirm_yes": "Yes",
+    "confirm_no": "No",
+    "order_success": "✔ Order placed!",
+    "order_success_msg": "Thank you for your purchase. Your order will be processed as soon as possible.",
+    "back_to_products": "Back to products",
+    "view_order": "View order"
+  },
+  "profile": {
+    "my_orders": "My orders",
+    "logout": "Log out",
+    "orders_title": "Orders",
+    "loading": "Loading...",
+    "no_orders": "You have no orders yet."
   }
 }

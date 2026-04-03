@@ -6,10 +6,11 @@ import { CurrencyPipe } from '@angular/common';
 import {signal} from '@angular/core';
 import { Category } from '../models/category.model';
 import { RouterLink } from '@angular/router';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-product',
-  imports: [CurrencyPipe, RouterLink],
+  imports: [CurrencyPipe, RouterLink, TranslatePipe],
   templateUrl: './products.html',
   styleUrl: './products.scss',
 })

@@ -1,6 +1,6 @@
 @if (cart()!.items.length > 0) {
   <section class="cart">
-    <h1>Winkelwagen</h1>
+    <h1>{{ 'cart.title' | translate }}</h1>
     @for (item of cart()!.items; track item.id) {
       <div class="cart-item">
         <img [src]="item.product.imageUrl" [alt]="item.product.name">
@@ -16,36 +16,34 @@
         <p class="subtotal">{{ item.product.price * item.quantity | currency:'EUR' }}</p>
         @if (confirmDeleteId() === item.id) {
           <div class="confirm-delete">
-            <span>Item verwijderen?</span>
+            <span>{{ 'cart.confirm_delete' | translate }}</span>
             <div class="buttons">
-              <button class="confirm-yes" (click)="deleteItem(item.id)">Ja</button>
-              <button class="confirm-no" (click)="confirmDeleteId.set(null)">Nee</button>
+              <button class="confirm-yes" (click)="deleteItem(item.id)">{{ 'cart.confirm_yes' | translate }}</button>
+              <button class="confirm-no" (click)="confirmDeleteId.set(null)">{{ 'cart.confirm_no' | translate }}</button>
             </div>
           </div>
         } @else {
-          <button class="delete-item" (click)="deleteItem(item.id)">Verwijder</button>
+          <button class="delete-item" (click)="deleteItem(item.id)">{{ 'cart.remove' | translate }}</button>
         }
       </div>
     }
     <div class="total">
-      <h2>Totaal: {{ cart()!.totalPrice | currency:'EUR' }}</h2>
-      <button class="place-order" (click)="placeOrder()">Bestel</button>
+      <h2>{{ 'cart.total' | translate }}: {{ cart()!.totalPrice | currency:'EUR' }}</h2>
+      <button class="place-order" (click)="placeOrder()">{{ 'cart.order' | translate }}</button>
     </div>
-    <button class="clear-cart" (click)="clearCart()">Winkelwagen leegmaken</button>
+    <button class="clear-cart" (click)="clearCart()">{{ 'cart.clear' | translate }}</button>
   </section>
-}
-
-@else {
+} @else {
   @if (orderPlaced()) {
     <div class="order-success">
-      <h1>✔ Bestelling geplaatst!</h1>
-      <p>Bedankt voor je aankoop. Je bestelling wordt zo snel mogelijk verwerkt.</p>
+      <h1>{{ 'cart.order_success' | translate }}</h1>
+      <p>{{ 'cart.order_success_msg' | translate }}</p>
       <div class="order-success-buttons">
-        <a routerLink="/" class="btn-products">Terug naar producten</a>
-        <a routerLink="/profile" class="btn-orders">Bestelling inzien</a>
+        <a routerLink="/" class="btn-products">{{ 'cart.back_to_products' | translate }}</a>
+        <a routerLink="/profile" class="btn-orders">{{ 'cart.view_order' | translate }}</a>
       </div>
     </div>
   } @else {
-    <h1 class="cart-empty">Je winkelwagen is leeg!</h1>
+    <h1 class="cart-empty">{{ 'cart.empty' | translate }}</h1>
   }
 }

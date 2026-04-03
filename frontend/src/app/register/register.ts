@@ -2,10 +2,11 @@ import { Component } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-register',
-  imports: [FormsModule, RouterLink],
+  imports: [FormsModule, RouterLink, TranslatePipe],
   templateUrl: './register.html',
   styleUrl: './register.scss',
 })
@@ -21,8 +22,8 @@ export class Register {
     lowercase: false,
     uppercase: false,
     special: false,
-    noSpaces: true
-  }
+    noSpaces: true,
+  };
 
   constructor(
     private authService: AuthService,
@@ -49,10 +50,10 @@ export class Register {
       uppercase: /[A-Z]/.test(this.password),
       special: /[^a-zA-Z0-9]/.test(this.password),
       noSpaces: !/\s/.test(this.password),
-    }
+    };
   }
 
   allRequirementsMet(): boolean {
-    return Object.values(this.passwordRequirements).every(requirement => requirement)
+    return Object.values(this.passwordRequirements).every((requirement) => requirement);
   }
 }

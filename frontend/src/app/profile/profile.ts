@@ -3,10 +3,11 @@ import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { OrderService } from '../services/order.service';
 import { CurrencyPipe, DatePipe } from '@angular/common';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-profile',
-  imports: [CurrencyPipe, DatePipe],
+  imports: [CurrencyPipe, DatePipe, TranslatePipe],
   templateUrl: './profile.html',
   styleUrl: './profile.scss',
 })

@@ -1,5 +1,26 @@
 @use '../../styles' as *;
 
+.back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 2rem 0 0 2rem;
+  background: $primary;
+  border: 2px solid $primary;
+  color: white;
+  border-radius: 0.5rem;
+  padding: 0.4rem 1rem;
+  font-family: 'Nunito', sans-serif;
+  font-size: 2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.25s ease;
+
+  &:hover {
+    background: $primary-dark;
+  }
+}
+
 .product-detail {
   display: flex;
   gap: 2rem;
