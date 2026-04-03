@@ -27,12 +27,16 @@ export class CartComponent {
   ) {}
 
   ngOnInit(): void {
-    this.cartService.getCart().subscribe((data) => this.cart.set(data));
+    this.cartService.getCart().subscribe((data) => {
+      this.cart.set(data);
+      this.cartService.refreshCount();
+    });
   }
 
   updateQuantity(id: number, quantity: number): void {
     this.cartService.updateQuantity(id, quantity).subscribe(() => {
       this.cartService.getCart().subscribe((data) => this.cart.set(data));
+      this.cartService.refreshCount();
     });
   }
 
@@ -41,6 +45,7 @@ export class CartComponent {
       this.cartService.deleteCartItem(id).subscribe(() => {
         this.confirmDeleteId.set(null);
         this.cartService.getCart().subscribe((data) => this.cart.set(data));
+        this.cartService.refreshCount();
       });
     } else {
       this.confirmDeleteId.set(id);
@@ -52,6 +57,7 @@ export class CartComponent {
       this.cartService.clearCart().subscribe(() => {
         this.confirmClearCart.set(false);
         this.cartService.getCart().subscribe((data) => this.cart.set(data));
+        this.cartService.refreshCount();
       });
     } else {
       this.confirmClearCart.set(true);
@@ -63,6 +69,7 @@ export class CartComponent {
       next: () => {
         this.orderPlaced.set(true);
         this.cartService.getCart().subscribe((data) => this.cart.set(data));
+        this.cartService.refreshCount();
       },
       error: () => {},
     });

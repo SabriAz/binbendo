@@ -37,6 +37,7 @@ export class ProductDetail {
     this.cartService.addToCart(this.product()!.id, this.quantity()).subscribe({
       next: () => {
         this.addedToCart.set(true);
+        this.cartService.refreshCount();
         setTimeout(() => this.addedToCart.set(false), 1100);
       },
     });

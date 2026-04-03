@@ -4,7 +4,12 @@
     @if (authService.isAdmin()) {
       <a routerLink="admin">Admin</a>
     }
-    <a routerLink="/cart">{{ 'nav.cart' | translate }}</a>
+    <a routerLink="/cart" class="cart-link">
+      {{ 'nav.cart' | translate }}
+      @if (cartService.cartCount() > 0) {
+        <span class="cart-badge">{{ cartService.cartCount() }}</span>
+      }
+    </a>
     @if (authService.isLoggedIn()) {
       <a routerLink="/profile">{{ 'nav.profile' | translate }}</a>
     } @else {
