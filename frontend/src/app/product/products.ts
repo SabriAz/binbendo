@@ -61,7 +61,13 @@ export class Products implements OnInit {
   );
 
   ngOnInit(): void {
-    this.productService.getAllProducts().subscribe((data) => this.products.set(data));
+    if (this.filterState.selectedCategories().length > 0) {
+      this.productService
+        .getProductsByCategories(this.filterState.selectedCategories())
+        .subscribe((data) => this.products.set(data));
+    } else {
+      this.productService.getAllProducts().subscribe((data) => this.products.set(data));
+    }
     this.categoryService.getAllCategories().subscribe((data) => this.categories.set(data));
   }
 }
