@@ -14,7 +14,17 @@
           <button (click)="updateQuantity(item.id, item.quantity + 1)">+</button>
         </div>
         <p class="subtotal">{{ item.product.price * item.quantity | currency:'EUR' }}</p>
-        <button class="delete-item" (click)="deleteItem(item.id)">Verwijder</button>
+        @if (confirmDeleteId() === item.id) {
+          <div class="confirm-delete">
+            <span>Item verwijderen?</span>
+            <div class="buttons">
+              <button class="confirm-yes" (click)="deleteItem(item.id)">Ja</button>
+              <button class="confirm-no" (click)="confirmDeleteId.set(null)">Nee</button>
+            </div>
+          </div>
+        } @else {
+          <button class="delete-item" (click)="deleteItem(item.id)">Verwijder</button>
+        }
       </div>
     }
     <div class="total">

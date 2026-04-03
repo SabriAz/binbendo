@@ -13,6 +13,11 @@ import { OrderService } from '../services/order.service';
 export class CartComponent {
   cart = signal<Cart | null>(null);
 
+  confirmDeleteId = signal<number | null>(null);
+
+  // Voor bestelling geplaatst melding
+  orderPlaced = signal(false);
+
   constructor(
     private cartService: CartService,
     private orderService: OrderService,
@@ -29,14 +34,19 @@ export class CartComponent {
   }
 
   deleteItem(id: number): void {
-    this.cartService.deleteCartItem(id).subscribe(() => {
-      this.cartService.getCart().subscribe((data) => this.cart.set(data));
-    });
+    if (this.confirmDeleteId() === id) {
+      this.cartService.deleteCartItem(id).subscribe(() => {
+        this.confirmDeleteId.set(null);
+        this.cartService.getCart().subscribe((data) => this.cart.set(data));
+      });
+    } else {
+      this.confirmDeleteId.set(id);
+    }
   }
 
   clearCart(): void {
     this.cartService.clearCart().subscribe(() => {
-      this.cart.set(null);
+      this.cartService.getCart().subscribe((data) => this.cart.set(data));
     });
   }
 
