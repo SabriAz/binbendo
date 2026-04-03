@@ -1,11 +1,19 @@
 <nav>
   <a class="brand" routerLink="/">Binbendo</a>
   <div class="nav-left">
-    <a routerLink="/cart">Winkelwagen</a>
+    <a routerLink="/cart">{{ 'nav.cart' | translate }}</a>
     @if (authService.isLoggedIn()) {
-      <a routerLink="/profile">Profiel</a>
+      <a routerLink="/profile">{{ 'nav.profile' | translate }}</a>
     } @else {
-      <a routerLink="/login">Log in</a>
+      <a routerLink="/login">{{ 'nav.login' | translate }}</a>
     }
+    <div class="lang-switch">
+      <button (click)="switchLang('nl')" [class.active]="currentLang === 'nl'">
+        <img src="/assets/images/nl_flag.png" alt="Nederlands">
+      </button>
+      <button (click)="switchLang('en')" [class.active]="currentLang === 'en'">
+        <img src="/assets/images/en_flag.png" alt="English">
+      </button>
+    </div>
   </div>
 </nav>
