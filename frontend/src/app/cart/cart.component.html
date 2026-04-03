@@ -36,6 +36,16 @@
 }
 
 @else {
-  <h1 class="cart-empty">Je winkelwagen is leeg!</h1>
+  @if (orderPlaced()) {
+    <div class="order-success">
+      <h1>✔ Bestelling geplaatst!</h1>
+      <p>Bedankt voor je aankoop. Je bestelling wordt zo snel mogelijk verwerkt.</p>
+      <div class="order-success-buttons">
+        <a routerLink="/" class="btn-products">Terug naar producten</a>
+        <a routerLink="/profile" class="btn-orders">Bestelling inzien</a>
+      </div>
+    </div>
+  } @else {
+    <h1 class="cart-empty">Je winkelwagen is leeg!</h1>
+  }
 }
-
