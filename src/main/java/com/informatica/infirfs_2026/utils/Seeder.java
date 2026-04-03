@@ -133,10 +133,10 @@ public class Seeder {
 
         // Amiibo
         Product product12 = new Product(
-                "Amiibo Link - Breath of the Wild",
+                "Amiibo Link - Tears of the Kingdom",
                 "Het iconische Link amiibo uit Breath of the Wild. Tik hem aan op je Switch voor exclusieve in-game beloningen zoals zeldzame wapens en materialen. Een must-have voor elke Zelda-fan en een prachtig verzamelobject voor op de plank.",
                 15.99,
-                "/assets/images/amiibo_link_botw.png",
+                "/assets/images/amiibo_link_totk.png",
                 category3
         );
         Product product13 = new Product(
