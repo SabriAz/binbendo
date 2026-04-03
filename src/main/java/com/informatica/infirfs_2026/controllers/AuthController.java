@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 @RestController
-@CrossOrigin(origins = {"http://localhost:4200", "http://*.student.inf.st.hsleiden.nl:17115"})
 @RequestMapping("/auth")
 public class AuthController {
 
@@ -66,7 +65,7 @@ public class AuthController {
         Cart cart = new Cart(registerdCustomUser);
         registerdCustomUser.setCart(cart);
         userDAO.save(registerdCustomUser);
-        String token = jwtUtil.generateToken(registerdCustomUser.getEmail());
+        String token = jwtUtil.generateToken(registerdCustomUser.getEmail(), registerdCustomUser.getRole().name());
         LoginResponse loginResponse = new LoginResponse(registerdCustomUser.getEmail(), token);
         return ResponseEntity.ok(loginResponse);
     }
@@ -81,9 +80,9 @@ public class AuthController {
 
             authManager.authenticate(authInputToken);
 
-            String token = jwtUtil.generateToken(body.email);
-
             CustomUser customUser = userDAO.findByEmail(body.email);
+            String token = jwtUtil.generateToken(body.email, customUser.getRole().name());
+
             LoginResponse loginResponse = new LoginResponse(customUser.getEmail(), token);
 
 

@@ -1,6 +1,6 @@
 {
   "nav": {
-    "cart": "Shopping Cart",
+    "cart": "Cart",
     "profile": "Profile",
     "login": "Log in"
   },
@@ -44,7 +44,7 @@
     "back_button": "Back"
   },
   "cart": {
-    "title": "Shopping Cart",
+    "title": "Cart",
     "total": "Total",
     "order": "Order",
     "clear": "Clear cart",
