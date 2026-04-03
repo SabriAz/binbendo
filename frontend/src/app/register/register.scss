@@ -70,18 +70,44 @@
 
     .requirements {
       list-style: none;
-      padding: 0.5rem;
+      padding: 0.75rem 1rem;
       border: 2px solid $secondary;
       background-color: white;
       border-radius: 0.75rem;
       box-shadow: $shadow;
+      margin-top: 0.75rem;
+      width: 20rem;
+      box-sizing: border-box;
+
+      p {
+        margin: 0 0 0.5rem 0;
+        font-weight: bold;
+        font-size: 0.9rem;
+        color: black;
+      }
 
       li {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
         color: $primary;
-        font-size: 0.85rem;
+        font-size: 0.9rem;
+        padding: 0.2rem 0;
+        transition: color 0.2s ease;
+
+        .icon {
+          font-size: 0.9rem;
+          width: 1rem;
+          text-align: center;
+          transition: color 0.2s ease;
+        }
 
         &.valid {
           color: green;
+
+          .icon {
+            color: green;
+          }
         }
       }
     }
