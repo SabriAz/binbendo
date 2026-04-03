@@ -56,7 +56,8 @@
     "order_success": "✔ Bestelling geplaatst!",
     "order_success_msg": "Bedankt voor je aankoop. Je bestelling wordt zo snel mogelijk verwerkt.",
     "back_to_products": "Terug naar producten",
-    "view_order": "Bestelling inzien"
+    "view_order": "Bestelling inzien",
+    "confirm_clear": "Winkelwagen leegmaken?"
   },
   "profile": {
     "my_orders": "Mijn bestellingen",

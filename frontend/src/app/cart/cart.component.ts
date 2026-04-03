@@ -16,6 +16,7 @@ export class CartComponent {
   cart = signal<Cart | null>(null);
 
   confirmDeleteId = signal<number | null>(null);
+  confirmClearCart = signal(false);
 
   // Voor bestelling geplaatst melding
   orderPlaced = signal(false);
@@ -47,9 +48,14 @@ export class CartComponent {
   }
 
   clearCart(): void {
-    this.cartService.clearCart().subscribe(() => {
-      this.cartService.getCart().subscribe((data) => this.cart.set(data));
-    });
+    if (this.confirmClearCart()) {
+      this.cartService.clearCart().subscribe(() => {
+        this.confirmClearCart.set(false);
+        this.cartService.getCart().subscribe((data) => this.cart.set(data));
+      });
+    } else {
+      this.confirmClearCart.set(true);
+    }
   }
 
   placeOrder(): void {

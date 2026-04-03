@@ -20,11 +20,13 @@ export class Admin implements OnInit {
   editingProductId: number | null = null;
   showNewProductForm = false;
   productForm = { name: '', description: '', price: 0, imageUrl: '', categoryId: 0 };
+  confirmDeleteProductId: number | null = null;
 
   // Category form
   editingCategoryId: number | null = null;
   showNewCategoryForm = false;
   categoryForm = { name: '' };
+  confirmDeleteCategoryId: number | null = null;
 
   constructor(
     private productService: ProductService,
@@ -74,7 +76,14 @@ export class Admin implements OnInit {
   }
 
   deleteProduct(id: number): void {
-    this.productService.deleteProduct(id).subscribe(() => this.loadProducts());
+    if (this.confirmDeleteProductId === id) {
+      this.productService.deleteProduct(id).subscribe(() => {
+        this.confirmDeleteProductId = null;
+        this.loadProducts();
+      });
+    } else {
+      this.confirmDeleteProductId = id;
+    }
   }
 
   cancelProduct(): void {
@@ -106,7 +115,14 @@ export class Admin implements OnInit {
   }
 
   deleteCategory(id: number): void {
-    this.categoryService.deleteCategory(id).subscribe(() => this.loadCategories());
+    if (this.confirmDeleteCategoryId === id) {
+      this.categoryService.deleteCategory(id).subscribe(() => {
+        this.confirmDeleteCategoryId = null;
+        this.loadCategories();
+      });
+    } else {
+      this.confirmDeleteCategoryId = id;
+    }
   }
 
   cancelCategory(): void {

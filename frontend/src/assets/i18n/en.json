@@ -56,7 +56,8 @@
     "order_success": "✔ Order placed!",
     "order_success_msg": "Thank you for your purchase. Your order will be processed as soon as possible.",
     "back_to_products": "Back to products",
-    "view_order": "View order"
+    "view_order": "View order",
+    "confirm_clear": "Clear cart?"
   },
   "profile": {
     "my_orders": "My orders",
