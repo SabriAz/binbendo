@@ -110,12 +110,24 @@
         gap: 0.5rem;
 
         .order-item {
-          display: flex;
-          justify-content: space-between;
+          display: grid;
+          grid-template-columns: 1fr auto auto;
+          gap: 1rem;
           font-size: 1rem;
           color: $secondary;
           padding: 0.4rem 0;
-          border-bottom: 1px solid $secondary;
+          border-bottom: 1px solid $disabled;
+          align-items: center;
+
+          span:nth-child(2) {
+            text-align: center;
+            min-width: 3rem;
+          }
+
+          span:nth-child(3) {
+            text-align: right;
+            min-width: 5rem;
+          }
 
           &:last-child {
             border-bottom: none;
