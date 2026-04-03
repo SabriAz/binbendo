@@ -1,6 +1,19 @@
 @if (cart()!.items.length > 0) {
   <section class="cart">
-    <h1>{{ 'cart.title' | translate }}</h1>
+    <div class="cart-header">
+      <h1>{{ 'cart.title' | translate }}</h1>
+      @if (confirmClearCart()) {
+        <div class="confirm-clear">
+          <span>{{ 'cart.confirm_clear' | translate }}</span>
+          <div class="buttons">
+            <button class="confirm-yes" (click)="clearCart()">{{ 'cart.confirm_yes' | translate }}</button>
+            <button class="confirm-no" (click)="confirmClearCart.set(false)">{{ 'cart.confirm_no' | translate }}</button>
+          </div>
+        </div>
+      } @else {
+        <button class="clear-cart" (click)="clearCart()">{{ 'cart.clear' | translate }}</button>
+      }
+    </div>
     @for (item of cart()!.items; track item.id) {
       <div class="cart-item">
         <img [src]="item.product.imageUrl" [alt]="item.product.name">
@@ -31,17 +44,6 @@
       <h2>{{ 'cart.total' | translate }}: {{ cart()!.totalPrice | currency:'EUR' }}</h2>
       <button class="place-order" (click)="placeOrder()">{{ 'cart.order' | translate }}</button>
     </div>
-    @if (confirmClearCart()) {
-      <div class="confirm-clear">
-        <span>{{ 'cart.confirm_clear' | translate }}</span>
-        <div class="buttons">
-          <button class="confirm-yes" (click)="clearCart()">{{ 'cart.confirm_yes' | translate }}</button>
-          <button class="confirm-no" (click)="confirmClearCart.set(false)">{{ 'cart.confirm_no' | translate }}</button>
-        </div>
-      </div>
-    } @else {
-      <button class="clear-cart" (click)="clearCart()">{{ 'cart.clear' | translate }}</button>
-    }
   </section>
 } @else {
   @if (orderPlaced()) {
