@@ -40,7 +40,8 @@
   "product_detail": {
     "not_found": "Product niet gevonden!",
     "add_to_cart": "+ Winkelwagen",
-    "added": "✔ Toegevoegd!"
+    "added": "✔ Toegevoegd!",
+    "back_button": "Terug"
   },
   "cart": {
     "title": "Winkelwagen",

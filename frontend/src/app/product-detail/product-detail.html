@@ -1,4 +1,4 @@
-<button class="back-button" (click)="goBack()">← Terug</button>
+<button class="back-button" (click)="goBack()">{{'product_detail.back_button' | translate }}</button>
 @if (product()) {
   <section class="product-detail">
     <img [src]="product()!.imageUrl" [alt]="product()!.name">

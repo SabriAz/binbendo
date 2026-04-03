@@ -40,7 +40,8 @@
   "product_detail": {
     "not_found": "Product not found!",
     "add_to_cart": "+ Add to Cart",
-    "added": "✔ Added!"
+    "added": "✔ Added!",
+    "back_button": "Back"
   },
   "cart": {
     "title": "Shopping Cart",
