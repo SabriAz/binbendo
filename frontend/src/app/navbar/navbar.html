@@ -2,6 +2,10 @@
   <a class="brand" routerLink="/">Binbendo</a>
   <div class="nav-left">
     <a routerLink="/cart">Winkelwagen</a>
-    <a routerLink="/login">Log in</a>
+    @if (authService.isLoggedIn()) {
+      <a routerLink="/profile">Profiel</a>
+    } @else {
+      <a routerLink="/login">Log in</a>
+    }
   </div>
 </nav>

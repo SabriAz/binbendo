@@ -14,4 +14,12 @@ export class OrderService {
   placeOrder(): Observable<any> {
     return this.http.post(`${this.apiUrl}`, {}, { responseType: 'text' });
   }
+
+  getOrders (): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}`);
+  }
+
+  getOrderById(id: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/${id}`);
+  }
 }
