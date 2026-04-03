@@ -37,4 +37,11 @@ export class AuthService {
   logout(): void {
     localStorage.removeItem('token');
   }
+
+  isAdmin(): boolean {
+    const token = localStorage.getItem('token');
+    if (!token) return false;
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    return payload.role === 'ROLE_ADMIN';
+  }
 }
