@@ -1,0 +1,117 @@
+<div class="admin-layout">
+  <h1>Admin Paneel</h1>
+
+  <section class="admin-section">
+    <h2>Producten</h2>
+    <table>
+      <thead>
+      <tr>
+        <th>Naam</th>
+        <th>Beschrijving</th>
+        <th>Prijs</th>
+        <th>Afbeelding URL</th>
+        <th>Categorie</th>
+        <th>Acties</th>
+      </tr>
+      </thead>
+      <tbody>
+        @for (product of products(); track product.id) {
+          @if (editingProductId === product.id) {
+            <tr class="edit-row">
+              <td><input [(ngModel)]="productForm.name"></td>
+              <td><input [(ngModel)]="productForm.description"></td>
+              <td><input type="number" [(ngModel)]="productForm.price"></td>
+              <td><input [(ngModel)]="productForm.imageUrl"></td>
+              <td>
+                <select [(ngModel)]="productForm.categoryId">
+                  @for (category of categories(); track category.id) {
+                    <option [value]="category.id">{{ category.name }}</option>
+                  }
+                </select>
+              </td>
+              <td>
+                <button class="btn-save" (click)="saveProduct(product.id)">Opslaan</button>
+                <button class="btn-cancel" (click)="cancelProduct()">Annuleren</button>
+              </td>
+            </tr>
+          } @else {
+            <tr>
+              <td>{{ product.name }}</td>
+              <td>{{ product.description }}</td>
+              <td>{{ product.price | currency:'EUR' }}</td>
+              <td>{{ product.imageUrl }}</td>
+              <td>{{ product.category?.name }}</td>
+              <td>
+                <button class="btn-edit" (click)="startEditProduct(product)">Bewerken</button>
+                <button class="btn-delete" (click)="deleteProduct(product.id)">Verwijderen</button>
+              </td>
+            </tr>
+          }
+        }
+        @if (showNewProductForm) {
+          <tr class="edit-row">
+            <td><input [(ngModel)]="productForm.name" placeholder="Naam"></td>
+            <td><input [(ngModel)]="productForm.description" placeholder="Beschrijving"></td>
+            <td><input type="number" [(ngModel)]="productForm.price" placeholder="Prijs"></td>
+            <td><input [(ngModel)]="productForm.imageUrl" placeholder="Afbeelding URL"></td>
+            <td>
+              <select [(ngModel)]="productForm.categoryId">
+                @for (category of categories(); track category.id) {
+                  <option [value]="category.id">{{ category.name }}</option>
+                }
+              </select>
+            </td>
+            <td>
+              <button class="btn-save" (click)="createProduct()">Aanmaken</button>
+              <button class="btn-cancel" (click)="cancelProduct()">Annuleren</button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+    <button class="btn-add" (click)="showNewProductForm = true; editingProductId = null">+ Product toevoegen</button>
+  </section>
+
+  <section class="admin-section">
+    <h2>Categorieën</h2>
+    <table>
+      <thead>
+      <tr>
+        <th>Naam</th>
+        <th>Acties</th>
+      </tr>
+      </thead>
+      <tbody>
+        @for (category of categories(); track category.id) {
+          @if (editingCategoryId === category.id) {
+            <tr class="edit-row">
+              <td><input [(ngModel)]="categoryForm.name"></td>
+              <td>
+                <button class="btn-save" (click)="saveCategory(category.id)">Opslaan</button>
+                <button class="btn-cancel" (click)="cancelCategory()">Annuleren</button>
+              </td>
+            </tr>
+          } @else {
+            <tr>
+              <td>{{ category.name }}</td>
+              <td>
+                <button class="btn-edit" (click)="startEditCategory(category)">Bewerken</button>
+                <button class="btn-delete" (click)="deleteCategory(category.id)">Verwijderen</button>
+              </td>
+            </tr>
+          }
+        }
+        @if (showNewCategoryForm) {
+          <tr class="edit-row">
+            <td><input [(ngModel)]="categoryForm.name" placeholder="Naam"></td>
+            <td>
+              <button class="btn-save" (click)="createCategory()">Aanmaken</button>
+              <button class="btn-cancel" (click)="cancelCategory()">Annuleren</button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+    <button class="btn-add" (click)="showNewCategoryForm = true; editingCategoryId = null">+ Categorie toevoegen</button>
+  </section>
+</div>

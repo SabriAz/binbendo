@@ -1,6 +1,9 @@
 <nav>
   <a class="brand" routerLink="/">Binbendo</a>
   <div class="nav-left">
+    @if (authService.isAdmin()) {
+      <a routerLink="admin">Admin</a>
+    }
     <a routerLink="/cart">{{ 'nav.cart' | translate }}</a>
     @if (authService.isLoggedIn()) {
       <a routerLink="/profile">{{ 'nav.profile' | translate }}</a>
