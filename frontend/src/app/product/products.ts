@@ -7,6 +7,7 @@ import {signal} from '@angular/core';
 import { Category } from '../models/category.model';
 import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
+import { FilterStateService } from '../services/filter-state.service';
 
 @Component({
   selector: 'app-product',
@@ -17,44 +18,46 @@ import { TranslatePipe } from '@ngx-translate/core';
 export class Products implements OnInit {
   products = signal<Product[]>([]);
   categories = signal<Category[]>([]);
-  selectedCategories = signal<number[]>([]);
-
-  searchQuery = signal('');
 
   constructor(
     private productService: ProductService,
     private categoryService: CategoryService,
+    public filterState: FilterStateService,
   ) {}
 
   toggleCategories(id: number) {
-    const currentCategories = this.selectedCategories();
+    const currentCategories = this.filterState.selectedCategories();
 
     if (currentCategories.includes(id)) {
-      this.selectedCategories.set(currentCategories.filter((category) => category !== id));
+      this.filterState.selectedCategories.set(
+        currentCategories.filter((category) => category !== id),
+      );
     } else {
-      this.selectedCategories.set([...currentCategories, id]);
+      this.filterState.selectedCategories.set([...currentCategories, id]);
     }
 
-    if (this.selectedCategories().length === 0) {
+    if (this.filterState.selectedCategories().length === 0) {
       this.productService.getAllProducts().subscribe((data) => this.products.set(data));
     } else {
       this.productService
-        .getProductsByCategories(this.selectedCategories())
+        .getProductsByCategories(this.filterState.selectedCategories())
         .subscribe((data) => this.products.set(data));
     }
   }
 
   clearSearch(): void {
-    this.searchQuery.set('');
+    this.filterState.searchQuery.set('');
   }
 
   clearCategories(): void {
-    this.selectedCategories.set([]);
+    this.filterState.selectedCategories.set([]);
     this.productService.getAllProducts().subscribe((data) => this.products.set(data));
   }
 
   filteredProducts = computed(() =>
-    this.products().filter((p) => p.name.toLowerCase().includes(this.searchQuery().toLowerCase())),
+    this.products().filter((p) =>
+      p.name.toLowerCase().includes(this.filterState.searchQuery().toLowerCase()),
+    ),
   );
 
   ngOnInit(): void {
