@@ -12,7 +12,9 @@
             <span>{{ quantity() }}</span>
             <button (click)="quantity.set(quantity() + 1)">+</button>
           </div>
-          <button class="add-to-cart-button" (click)="addToCart()">+ Winkelwagen</button>
+          <button class="add-to-cart-button" (click)="addToCart()">
+            {{ addedToCart() ? '✔ Toegevoegd!' : '+ Winkelwagen' }}
+          </button>
         </div>
       </div>
     </div>

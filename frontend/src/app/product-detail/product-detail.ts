@@ -15,10 +15,13 @@ export class ProductDetail {
   product = signal<Product | null>(null);
   quantity = signal(1);
 
+  // Voor melding dat add to cart gelukt is
+  addedToCart = signal(false);
+
   constructor(
     private route: ActivatedRoute,
     private productService: ProductService,
-    private cartService: CartService
+    private cartService: CartService,
   ) {}
 
   ngOnInit() {
@@ -26,7 +29,12 @@ export class ProductDetail {
     this.productService.getProductById(+id!).subscribe((product) => this.product.set(product));
   }
 
-  addToCart() {
-    this.cartService.addToCart( this.product()!.id, this.quantity()).subscribe();
+  addToCart(): void {
+    this.cartService.addToCart(this.product()!.id, this.quantity()).subscribe({
+      next: () => {
+        this.addedToCart.set(true);
+        setTimeout(() => (this.addedToCart.set(false)), 1100);
+      },
+    });
   }
 }
