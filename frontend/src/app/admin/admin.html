@@ -36,7 +36,7 @@
             </tr>
           } @else {
             <tr>
-              <td>{{ product.name }}</td>
+              <td>{{ product.category?.name }}</td>
               <td>{{ product.description }}</td>
               <td>{{ product.price | currency:'EUR' }}</td>
               <td>{{ product.imageUrl }}</td>

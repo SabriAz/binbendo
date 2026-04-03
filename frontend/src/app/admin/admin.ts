@@ -60,6 +60,7 @@ export class Admin implements OnInit {
   saveProduct(id: number): void {
     this.productService.updateProduct(id, this.productForm).subscribe(() => {
       this.editingProductId = null;
+      this.productForm = { name: '', description: '', price: 0, imageUrl: '', categoryId: 0 };
       this.loadProducts();
     });
   }
