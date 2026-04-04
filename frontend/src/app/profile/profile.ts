@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { OrderService } from '../services/order.service';
 import { CurrencyPipe, DatePipe } from '@angular/common';
 import { TranslatePipe } from '@ngx-translate/core';
+import { CartService } from '../services/cart.service';
 
 @Component({
   selector: 'app-profile',
@@ -21,6 +22,7 @@ export class Profile {
     public authService: AuthService,
     private orderService: OrderService,
     private router: Router,
+    private cartService: CartService,
   ) {}
 
   loadOrders(): void {
@@ -45,6 +47,7 @@ export class Profile {
 
   logout(): void {
     this.authService.logout();
+    this.cartService.cartCount.set(0);
     this.router.navigate(['/']);
   }
 }
