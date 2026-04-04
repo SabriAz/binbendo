@@ -1,22 +1,25 @@
+<button class="back-button" (click)="goBack()">{{'product_detail.back_button' | translate }}</button>
 @if (product()) {
   <section class="product-detail">
     <img [src]="product()!.imageUrl" [alt]="product()!.name">
     <div class="info">
       <h1>{{ product()!.name }}</h1>
       <p class="description">{{ product()!.description }}</p>
-      <p class="price">{{ product()!.price | currency:'EUR'}}</p>
-    </div>
-    <div class="quantity">
-      <button (click)="quantity() > 1 && quantity.set(quantity() - 1)">-</button>
-      <span>{{ quantity() }}</span>
-      <button (click)="quantity.set(quantity() + 1)">+</button>
-    </div>
-    <div class="add-to-cart-button">
-      <button (click)="addToCart()">+ Winkelwagen</button>
+      <div class="price-row">
+        <p class="price">{{ product()!.price | currency:'EUR'}}</p>
+        <div class="actions">
+          <div class="quantity">
+            <button (click)="quantity() > 1 && quantity.set(quantity() - 1)">-</button>
+            <span>{{ quantity() }}</span>
+            <button (click)="quantity.set(quantity() + 1)">+</button>
+          </div>
+          <button class="add-to-cart-button" (click)="addToCart()">
+            {{ addedToCart() ? ('product_detail.added' | translate) : ('product_detail.add_to_cart' | translate) }}
+          </button>
+        </div>
+      </div>
     </div>
   </section>
-}
-
-@else {
-  <h1>Product niet gevonden!</h1>
+} @else {
+  <h1>{{ 'product_detail.not_found' | translate }}</h1>
 }

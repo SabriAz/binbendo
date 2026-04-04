@@ -8,6 +8,11 @@ nav {
   background-color: $primary;
   border-radius: 5rem;
 
+  .material-icons {
+    font-size: 3rem;
+    vertical-align: middle;
+  }
+
   .brand {
     align-self: start;
     font-size: 3rem;
@@ -21,10 +26,58 @@ nav {
     justify-content: center;
     gap: 1.5rem;
   }
+  .lang-switch {
+    display: flex;
+    gap: 0.5rem;
+
+    button {
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      opacity: 0.6;
+      transition: opacity 0.2s ease;
+
+      &.active {
+        opacity: 1;
+      }
+
+      &:hover {
+        opacity: 0.9;
+      }
+
+      img {
+        width: 2rem;
+        height: 1.5rem;
+        object-fit: cover;
+        border-radius: 0.2rem;
+        display: block;
+      }
+    }
+  }
 
   a {
     color: white;
     text-decoration: none;
     font-size: 2.25rem;
+  }
+  .cart-link {
+    position: relative;
+
+    .cart-badge {
+      position: absolute;
+      top: -0.6rem;
+      right: -0.9rem;
+      background: white;
+      color: $primary;
+      font-size: 0.7rem;
+      font-weight: bold;
+      border-radius: 50%;
+      width: 1.1rem;
+      height: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
   }
 }

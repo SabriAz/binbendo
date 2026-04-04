@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { CartComponent } from '../cart/cart.component';
@@ -10,6 +10,7 @@ import { environment } from '../../environments/environment';
 })
 export class CartService {
   private apiUrl = `${environment.apiUrl}/cart`;
+  cartCount = signal(0);
 
   constructor(private http: HttpClient) {}
 
@@ -30,6 +31,15 @@ export class CartService {
   }
 
   clearCart(): Observable<any> {
-    return this.http.delete(`${this.apiUrl}`,  { responseType: 'text' });
+    return this.http.delete(`${this.apiUrl}`, { responseType: 'text' });
+  }
+
+  refreshCount(): void {
+    if (this.http) {
+      this.getCart().subscribe((cart) => {
+        const total = cart.items.reduce((sum, item) => sum + item.quantity, 0);
+        this.cartCount.set(total);
+      });
+    }
   }
 }

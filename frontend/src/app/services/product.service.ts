@@ -24,4 +24,17 @@ export class ProductService {
   getProductById(id: number): Observable<Product> {
     return this.http.get<Product>(`${this.apiUrl}/${id}`);
   }
+
+  // ADMIN ENDPOINTS!!
+  createProduct(product: { name: string; description: string; price: number; imageUrl: string; categoryId: number }): Observable<string> {
+    return this.http.post(`${this.apiUrl}`, product, { responseType: 'text' });
+  }
+
+  updateProduct(id: number, product: { name: string; description: string; price: number; imageUrl: string; categoryId: number }): Observable<string> {
+    return this.http.put(`${this.apiUrl}/${id}`, product, { responseType: 'text' });
+  }
+
+  deleteProduct(id: number): Observable<string> {
+    return this.http.delete(`${this.apiUrl}/${id}`, { responseType: 'text' });
+  }
 }

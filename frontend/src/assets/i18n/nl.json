@@ -1,0 +1,96 @@
+{
+  "nav": {
+    "cart": "Winkelwagen",
+    "profile": "Profiel",
+    "login": "Log in"
+  },
+  "login": {
+    "title": "Inloggen",
+    "email": "E-mailadres",
+    "password": "Wachtwoord",
+    "button": "Log in",
+    "error": "E-mailadres of wachtwoord klopt niet",
+    "no_account": "Heb je nog geen account?",
+    "register_link": "Registreer hier!"
+  },
+  "register": {
+    "title": "Registreren",
+    "email": "E-mailadres",
+    "password": "Wachtwoord",
+    "button": "Registreer",
+    "error": "E-mailadres klopt niet!",
+    "has_account": "Heb je al een account?",
+    "login_link": "Log in hier!",
+    "requirements": {
+      "title": "Wachtwoord vereisten:",
+      "length": "Minimaal 8 karakters",
+      "digit": "Minimaal 1 cijfer",
+      "lowercase": "Minimaal 1 kleine letter",
+      "uppercase": "Minimaal 1 hoofdletter",
+      "special": "Minimaal 1 speciaal karakter",
+      "no_spaces": "Geen spaties"
+    }
+  },
+  "products": {
+    "search_placeholder": "Zoeken...",
+    "filter_categories": "Filter op Categorieën",
+    "clear_filters": "X Verwijder filters",
+    "view_product": "Bekijk product",
+    "no_results": "Geen resultaten gevonden voor"
+  },
+  "product_detail": {
+    "not_found": "Product niet gevonden!",
+    "add_to_cart": "+ Winkelwagen",
+    "added": "✔ Toegevoegd!",
+    "back_button": "← Terug"
+  },
+  "cart": {
+    "title": "Winkelwagen",
+    "total": "Totaal",
+    "order": "Bestel",
+    "clear": "Winkelwagen leegmaken",
+    "empty": "Je winkelwagen is leeg!",
+    "remove": "Verwijder",
+    "confirm_delete": "Item verwijderen?",
+    "confirm_yes": "Ja",
+    "confirm_no": "Nee",
+    "order_success": "✔ Bestelling geplaatst!",
+    "order_success_msg": "Bedankt voor je aankoop. Je bestelling wordt zo snel mogelijk verwerkt.",
+    "back_to_products": "Terug naar producten",
+    "view_order": "Bestelling inzien",
+    "confirm_clear": "Winkelwagen leegmaken?"
+  },
+  "profile": {
+    "my_orders": "Mijn bestellingen",
+    "logout": "Uitloggen",
+    "orders_title": "Bestellingen",
+    "loading": "Laden...",
+    "no_orders": "Je hebt nog geen bestellingen."
+  },
+  "admin": {
+    "title": "Admin Paneel",
+    "save": "Opslaan",
+    "cancel": "Annuleren",
+    "edit": "Bewerken",
+    "delete": "Verwijderen",
+    "create": "Aanmaken",
+    "confirm_delete": "Verwijderen?",
+    "confirm_yes": "Ja",
+    "confirm_no": "Nee",
+    "actions": "Acties",
+    "products": {
+      "title": "Producten",
+      "name": "Naam",
+      "description": "Beschrijving",
+      "price": "Prijs",
+      "image_url": "Afbeelding URL",
+      "category": "Categorie",
+      "add": "+ Product toevoegen"
+    },
+    "categories": {
+      "title": "Categorieën",
+      "name": "Naam",
+      "add": "+ Categorie toevoegen"
+    }
+  }
+}

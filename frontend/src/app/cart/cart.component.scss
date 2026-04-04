@@ -5,9 +5,16 @@
   max-width: 60rem;
   margin: 0 auto;
 
-  h1 {
-    font-size: 2rem;
+  .cart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 2rem;
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 0;
+    }
   }
 
   .cart-item {
@@ -35,6 +42,15 @@
 
       p {
         color: $secondary;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+
+        &:hover h2 {
+          text-decoration: underline;
+        }
       }
     }
 
@@ -75,6 +91,7 @@
 
     .delete-item {
       background: none;
+      min-width: 8rem;
       border: 2px solid $secondary;
       color: $secondary;
       padding: 0.5rem 1rem;
@@ -85,6 +102,46 @@
       &:hover {
         background: $primary;
         color: white;
+      }
+    }
+
+    .confirm-delete {
+      min-width: 8rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      font-weight: bold;
+
+      .buttons {
+        display: flex;
+        gap: 0.5rem;
+      }
+
+
+      .confirm-yes {
+        background: $primary;
+        color: white;
+        border: none;
+        padding: 0.4rem 0.75rem;
+        border-radius: 0.5rem;
+        cursor: pointer;
+        transition: all 0.25s ease;
+
+        &:hover { background: $primary-dark; }
+      }
+
+      .confirm-no {
+        background: none;
+        border: 2px solid $secondary;
+        color: $secondary;
+        padding: 0.4rem 0.75rem;
+        border-radius: 0.5rem;
+        cursor: pointer;
+        transition: all 0.25s ease;
+
+        &:hover { background: $secondary; color: white; }
       }
     }
   }
@@ -98,6 +155,45 @@
     h2 {
       font-size: 1.75rem;
       color: $primary;
+    }
+  }
+
+  .confirm-clear {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+    font-weight: bold;
+
+    .buttons {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .confirm-yes {
+      background: $primary;
+      color: white;
+      border: none;
+      padding: 0.4rem 0.75rem;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: all 0.25s ease;
+
+      &:hover { background: $primary-dark; }
+    }
+
+    .confirm-no {
+      background: none;
+      border: 2px solid $secondary;
+      color: $secondary;
+      padding: 0.4rem 0.75rem;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: all 0.25s ease;
+
+      &:hover { background: $secondary; color: white; }
     }
   }
 
@@ -140,4 +236,60 @@
 .cart-empty {
   display: flex;
   justify-content: center;
+}
+
+.order-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 4rem;
+  text-align: center;
+
+  h1 {
+    font-size: 2rem;
+    //color: green;
+  }
+
+  p {
+    font-size: 1.25rem;
+    color: $secondary;
+  }
+
+  .order-success-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+
+    a {
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      font-weight: bold;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .btn-products {
+      border: 2px solid $secondary;
+      color: $secondary;
+
+      &:hover {
+        background: $secondary;
+        color: white;
+      }
+    }
+
+    .btn-orders {
+      background: $primary;
+      color: white;
+      border: 2px solid $primary;
+
+      &:hover {
+        background: $primary-dark;
+      }
+    }
+  }
 }

@@ -40,6 +40,7 @@
     button {
       width: 20rem;
       padding: 0.75rem;
+      background-color: $primary;
       color: white;
       border: none;
       border-radius: 0.5rem;
@@ -47,6 +48,10 @@
       font-weight: bold;
       cursor: pointer;
       transition: background-color 0.25s ease;
+
+      &:not(:disabled) {
+        background-color: $primary;
+      }
 
       &:disabled {
         background-color: $disabled;

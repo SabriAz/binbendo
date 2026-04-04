@@ -1,35 +1,35 @@
-<div class = register-page>
+<div class="register-page">
   <div class="register-container">
-    <h2>Register</h2>
-    <input type="email" [(ngModel)]="email" placeholder="E-mailadres">
-    <input type="password" [(ngModel)]="password" (ngModelChange)="checkPassword()" placeholder="Wachtwoord">
-    <button (click)="register()" [disabled]="!email || !password || !allRequirementsMet()">Register</button>
+    <h2>{{ 'register.title' | translate }}</h2>
+    <input type="email" [(ngModel)]="email" [placeholder]="'register.email' | translate">
+    <input type="password" [(ngModel)]="password" (ngModelChange)="checkPassword()" [placeholder]="'register.password' | translate">
+    <button (click)="register()" [disabled]="!email || !password || !allRequirementsMet()">{{ 'register.button' | translate }}</button>
     @if (errorMessage) {
       <p class="error">{{ errorMessage }}</p>
     }
     <p>
-      Heb je al een account?
-      <a routerLink="/login">Log in hier!</a>
+      {{ 'register.has_account' | translate }}
+      <a routerLink="/login">{{ 'register.login_link' | translate }}</a>
     </p>
     <ul class="requirements">
-      <p>Wachtwoord vereisten:</p>
+      <p>{{ 'register.requirements.title' | translate }}</p>
       <li [class.valid]="passwordRequirements.length">
-        <span class="icon">{{ passwordRequirements.length ? '✔' : '✘' }}</span> Minimaal 8 karakters
+        <span class="icon">{{ passwordRequirements.length ? '✔' : '✘' }}</span> {{ 'register.requirements.length' | translate }}
       </li>
       <li [class.valid]="passwordRequirements.digit">
-        <span class="icon">{{ passwordRequirements.digit ? '✔' : '✘' }}</span> Minimaal 1 cijfer
+        <span class="icon">{{ passwordRequirements.digit ? '✔' : '✘' }}</span> {{ 'register.requirements.digit' | translate }}
       </li>
       <li [class.valid]="passwordRequirements.lowercase">
-        <span class="icon">{{ passwordRequirements.lowercase ? '✔' : '✘' }}</span> Minimaal 1 kleine letter
+        <span class="icon">{{ passwordRequirements.lowercase ? '✔' : '✘' }}</span> {{ 'register.requirements.lowercase' | translate }}
       </li>
       <li [class.valid]="passwordRequirements.uppercase">
-        <span class="icon">{{ passwordRequirements.uppercase ? '✔' : '✘' }}</span> Minimaal 1 hoofdletter
+        <span class="icon">{{ passwordRequirements.uppercase ? '✔' : '✘' }}</span> {{ 'register.requirements.uppercase' | translate }}
       </li>
       <li [class.valid]="passwordRequirements.special">
-        <span class="icon">{{ passwordRequirements.special ? '✔' : '✘' }}</span> Minimaal 1 speciaal karakter
+        <span class="icon">{{ passwordRequirements.special ? '✔' : '✘' }}</span> {{ 'register.requirements.special' | translate }}
       </li>
       <li [class.valid]="passwordRequirements.noSpaces">
-        <span class="icon">{{ passwordRequirements.noSpaces ? '✔' : '✘' }}</span> Geen spaties
+        <span class="icon">{{ passwordRequirements.noSpaces ? '✔' : '✘' }}</span> {{ 'register.requirements.no_spaces' | translate }}
       </li>
     </ul>
   </div>

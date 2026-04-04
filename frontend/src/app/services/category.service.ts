@@ -15,4 +15,17 @@ export class CategoryService {
     return this.http.get<Category[]>(`${this.apiUrl}`);
   }
 
+  // ADMIN ENDPOINTS!!
+  createCategory(category: { name: string }): Observable<string> {
+    return this.http.post(`${this.apiUrl}`, category, { responseType: 'text' });
+  }
+
+  updateCategory(id: number, category: { name: string }): Observable<string> {
+    return this.http.put(`${this.apiUrl}/${id}`, category, { responseType: 'text' });
+  }
+
+  deleteCategory(id: number): Observable<string> {
+    return this.http.delete(`${this.apiUrl}/${id}`, { responseType: 'text' });
+  }
+
 }

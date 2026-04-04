@@ -1,11 +1,28 @@
 @if (cart()!.items.length > 0) {
   <section class="cart">
-    <h1>Winkelwagen</h1>
+    <div class="cart-header">
+      <h1>{{ 'cart.title' | translate }}</h1>
+      @if (confirmClearCart()) {
+        <div class="confirm-clear">
+          <span>{{ 'cart.confirm_clear' | translate }}</span>
+          <div class="buttons">
+            <button class="confirm-yes" (click)="clearCart()">{{ 'cart.confirm_yes' | translate }}</button>
+            <button class="confirm-no" (click)="confirmClearCart.set(false)">{{ 'cart.confirm_no' | translate }}</button>
+          </div>
+        </div>
+      } @else {
+        <button class="clear-cart" (click)="clearCart()">{{ 'cart.clear' | translate }}</button>
+      }
+    </div>
     @for (item of cart()!.items; track item.id) {
       <div class="cart-item">
-        <img [src]="item.product.imageUrl" [alt]="item.product.name">
+        <a [routerLink]="['/product/', item.product.id]">
+          <img [src]="item.product.imageUrl" [alt]="item.product.name">
+        </a>
         <div class="info">
-          <h2>{{ item.product.name }}</h2>
+          <a [routerLink]="['/product/', item.product.id]">
+            <h2>{{ item.product.name }}</h2>
+          </a>
           <p>{{ item.product.price | currency:'EUR' }}</p>
         </div>
         <div class="quantity">
@@ -14,18 +31,35 @@
           <button (click)="updateQuantity(item.id, item.quantity + 1)">+</button>
         </div>
         <p class="subtotal">{{ item.product.price * item.quantity | currency:'EUR' }}</p>
-        <button class="delete-item" (click)="deleteItem(item.id)">Verwijder</button>
+        @if (confirmDeleteId() === item.id) {
+          <div class="confirm-delete">
+            <span>{{ 'cart.confirm_delete' | translate }}</span>
+            <div class="buttons">
+              <button class="confirm-yes" (click)="deleteItem(item.id)">{{ 'cart.confirm_yes' | translate }}</button>
+              <button class="confirm-no" (click)="confirmDeleteId.set(null)">{{ 'cart.confirm_no' | translate }}</button>
+            </div>
+          </div>
+        } @else {
+          <button class="delete-item" (click)="deleteItem(item.id)">{{ 'cart.remove' | translate }}</button>
+        }
       </div>
     }
     <div class="total">
-      <h2>Totaal: {{ cart()!.totalPrice | currency:'EUR' }}</h2>
-      <button class="place-order" (click)="placeOrder()">Bestel</button>
+      <h2>{{ 'cart.total' | translate }}: {{ cart()!.totalPrice | currency:'EUR' }}</h2>
+      <button class="place-order" (click)="placeOrder()">{{ 'cart.order' | translate }}</button>
     </div>
-    <button class="clear-cart" (click)="clearCart()">Winkelwagen leegmaken</button>
   </section>
+} @else {
+  @if (orderPlaced()) {
+    <div class="order-success">
+      <h1>{{ 'cart.order_success' | translate }}</h1>
+      <p>{{ 'cart.order_success_msg' | translate }}</p>
+      <div class="order-success-buttons">
+        <a routerLink="/" class="btn-products">{{ 'cart.back_to_products' | translate }}</a>
+        <a routerLink="/profile" class="btn-orders">{{ 'cart.view_order' | translate }}</a>
+      </div>
+    </div>
+  } @else {
+    <h1 class="cart-empty">{{ 'cart.empty' | translate }}</h1>
+  }
 }
-
-@else {
-  <h1 class="cart-empty">Je winkelwagen is leeg!</h1>
-}
-

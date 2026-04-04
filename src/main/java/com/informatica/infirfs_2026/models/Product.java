@@ -1,6 +1,6 @@
 package com.informatica.infirfs_2026.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 @Entity
@@ -19,7 +19,7 @@ public class Product {
     private String imageUrl;
 
     @ManyToOne(cascade = CascadeType.MERGE)
-    @JsonBackReference
+    @JsonIgnoreProperties("products")
     private Category category;
 
 
