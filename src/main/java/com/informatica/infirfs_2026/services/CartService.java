@@ -41,12 +41,19 @@ public class CartService {
         Product product = this.productRepository.findById(cartItemDTO.productId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found"));
 
-        CartItem cartItem = new CartItem(
-                cart,
-                product,
-                cartItemDTO.quantity);
+        // Check of product al in cart zit
+        CartItem existing = cart.getItems().stream()
+                .filter(item -> item.getProduct().getId().equals(product.getId()))
+                .findFirst()
+                .orElse(null);
 
-        this.cartItemRepository.save(cartItem);
+        if (existing != null) {
+            existing.setQuantity(existing.getQuantity() + cartItemDTO.quantity);
+            this.cartItemRepository.save(existing);
+        } else {
+            CartItem cartItem = new CartItem(cart, product, cartItemDTO.quantity);
+            this.cartItemRepository.save(cartItem);
+        }
     }
 
     // Used for the patch mapping in cart controller for changing quantity of specific cart item
