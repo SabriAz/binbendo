@@ -35,13 +35,14 @@
     "search_placeholder": "Search...",
     "filter_categories": "Filter by Categories",
     "clear_filters": "X Remove filters",
-    "view_product": "View product"
+    "view_product": "View product",
+    "no_results": "No results found for"
   },
   "product_detail": {
     "not_found": "Product not found!",
     "add_to_cart": "+ Add to Cart",
     "added": "✔ Added!",
-    "back_button": "Back"
+    "back_button": "← Back"
   },
   "cart": {
     "title": "Cart",
@@ -65,5 +66,31 @@
     "orders_title": "Orders",
     "loading": "Loading...",
     "no_orders": "You have no orders yet."
+  },
+  "admin": {
+    "title": "Admin Panel",
+    "save": "Save",
+    "cancel": "Cancel",
+    "edit": "Edit",
+    "delete": "Delete",
+    "create": "Create",
+    "confirm_delete": "Delete?",
+    "confirm_yes": "Yes",
+    "confirm_no": "No",
+    "actions": "Actions",
+    "products": {
+      "title": "Products",
+      "name": "Name",
+      "description": "Description",
+      "price": "Price",
+      "image_url": "Image URL",
+      "category": "Category",
+      "add": "+ Add product"
+    },
+    "categories": {
+      "title": "Categories",
+      "name": "Name",
+      "add": "+ Add category"
+    }
   }
 }

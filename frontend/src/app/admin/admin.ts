@@ -5,10 +5,11 @@ import { ProductService } from '../services/product.service';
 import { CategoryService } from '../services/category.service';
 import { CurrencyPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-admin',
-  imports: [CurrencyPipe, FormsModule],
+  imports: [CurrencyPipe, FormsModule, TranslatePipe],
   templateUrl: './admin.html',
   styleUrl: './admin.scss',
 })

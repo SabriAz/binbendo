@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login',
@@ -19,6 +19,7 @@ export class Login {
   constructor(
     private authService: AuthService,
     private router: Router,
+    private translate: TranslateService,
   ) {}
 
   login(): void {
@@ -28,8 +29,8 @@ export class Login {
         this.router.navigate(['/']);
       },
       error: () => {
-        this.errorMessage = 'E-mailadres of wachtwoord klopt niet';
-      },
+        this.errorMessage = this.translate.instant('login.error');
+      }
     });
   }
 }

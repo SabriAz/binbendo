@@ -1,27 +1,27 @@
 <div class="admin-layout">
-  <h1>Admin Paneel</h1>
+  <h1>{{ 'admin.title' | translate }}</h1>
 
   <section class="admin-section">
-    <h2>Producten</h2>
+    <h2>{{ 'admin.products.title' | translate }}</h2>
     <table>
       <thead>
       <tr>
-        <th>Naam</th>
-        <th>Beschrijving</th>
-        <th>Prijs</th>
-        <th>Afbeelding URL</th>
-        <th>Categorie</th>
-        <th>Acties</th>
+        <th>{{ 'admin.products.name' | translate }}</th>
+        <th>{{ 'admin.products.description' | translate }}</th>
+        <th>{{ 'admin.products.price' | translate }}</th>
+        <th>{{ 'admin.products.image_url' | translate }}</th>
+        <th>{{ 'admin.products.category' | translate }}</th>
+        <th>{{ 'admin.actions' | translate }}</th>
       </tr>
       </thead>
       <tbody>
         @for (product of products(); track product.id) {
           @if (editingProductId === product.id) {
             <tr class="edit-row">
-              <td><input [(ngModel)]="productForm.name"></td>
-              <td><input [(ngModel)]="productForm.description"></td>
-              <td><input type="number" [(ngModel)]="productForm.price"></td>
-              <td><input [(ngModel)]="productForm.imageUrl"></td>
+              <td><input [(ngModel)]="productForm.name" [placeholder]="'admin.products.name' | translate"></td>
+              <td><input [(ngModel)]="productForm.description" [placeholder]="'admin.products.description' | translate"></td>
+              <td><input type="number" [(ngModel)]="productForm.price" [placeholder]="'admin.products.price' | translate"></td>
+              <td><input [(ngModel)]="productForm.imageUrl" [placeholder]="'admin.products.image_url' | translate"></td>
               <td>
                 <select [(ngModel)]="productForm.categoryId">
                   @for (category of categories(); track category.id) {
@@ -30,8 +30,8 @@
                 </select>
               </td>
               <td>
-                <button class="btn-save" (click)="saveProduct(product.id)">Opslaan</button>
-                <button class="btn-cancel" (click)="cancelProduct()">Annuleren</button>
+                <button class="btn-save" (click)="saveProduct(product.id)">{{ 'admin.save' | translate }}</button>
+                <button class="btn-cancel" (click)="cancelProduct()">{{ 'admin.cancel' | translate }}</button>
               </td>
             </tr>
           } @else {
@@ -44,15 +44,15 @@
               <td>
                 @if (confirmDeleteProductId === product.id) {
                   <div class="confirm-delete">
-                    <span>Verwijderen?</span>
+                    <span>{{ 'admin.confirm_delete' | translate }}</span>
                     <div class="buttons">
-                      <button class="btn-delete-yes" (click)="deleteProduct(product.id)">Ja</button>
-                      <button class="btn-delete-no" (click)="confirmDeleteProductId = null">Nee</button>
+                      <button class="btn-delete-yes" (click)="deleteProduct(product.id)">{{ 'admin.confirm_yes' | translate }}</button>
+                      <button class="btn-delete-no" (click)="confirmDeleteProductId = null">{{ 'admin.confirm_no' | translate }}</button>
                     </div>
                   </div>
                 } @else {
-                  <button class="btn-edit" (click)="startEditProduct(product)">Bewerken</button>
-                  <button class="btn-delete" (click)="deleteProduct(product.id)">Verwijderen</button>
+                  <button class="btn-edit" (click)="startEditProduct(product)">{{ 'admin.edit' | translate }}</button>
+                  <button class="btn-delete" (click)="deleteProduct(product.id)">{{ 'admin.delete' | translate }}</button>
                 }
               </td>
             </tr>
@@ -60,10 +60,10 @@
         }
         @if (showNewProductForm) {
           <tr class="edit-row">
-            <td><input [(ngModel)]="productForm.name" placeholder="Naam"></td>
-            <td><input [(ngModel)]="productForm.description" placeholder="Beschrijving"></td>
-            <td><input type="number" [(ngModel)]="productForm.price" placeholder="Prijs"></td>
-            <td><input [(ngModel)]="productForm.imageUrl" placeholder="Afbeelding URL"></td>
+            <td><input [(ngModel)]="productForm.name" [placeholder]="'admin.products.name' | translate"></td>
+            <td><input [(ngModel)]="productForm.description" [placeholder]="'admin.products.description' | translate"></td>
+            <td><input type="number" [(ngModel)]="productForm.price" [placeholder]="'admin.products.price' | translate"></td>
+            <td><input [(ngModel)]="productForm.imageUrl" [placeholder]="'admin.products.image_url' | translate"></td>
             <td>
               <select [(ngModel)]="productForm.categoryId">
                 @for (category of categories(); track category.id) {
@@ -72,33 +72,33 @@
               </select>
             </td>
             <td>
-              <button class="btn-save" (click)="createProduct()">Aanmaken</button>
-              <button class="btn-cancel" (click)="cancelProduct()">Annuleren</button>
+              <button class="btn-save" (click)="createProduct()">{{ 'admin.create' | translate }}</button>
+              <button class="btn-cancel" (click)="cancelProduct()">{{ 'admin.cancel' | translate }}</button>
             </td>
           </tr>
         }
       </tbody>
     </table>
-    <button class="btn-add" (click)="showNewProductForm = true; editingProductId = null">+ Product toevoegen</button>
+    <button class="btn-add" (click)="showNewProductForm = true; editingProductId = null">{{ 'admin.products.add' | translate }}</button>
   </section>
 
   <section class="admin-section">
-    <h2>Categorieën</h2>
+    <h2>{{ 'admin.categories.title' | translate }}</h2>
     <table>
       <thead>
       <tr>
-        <th>Naam</th>
-        <th>Acties</th>
+        <th>{{ 'admin.categories.name' | translate }}</th>
+        <th>{{ 'admin.actions' | translate }}</th>
       </tr>
       </thead>
       <tbody>
         @for (category of categories(); track category.id) {
           @if (editingCategoryId === category.id) {
             <tr class="edit-row">
-              <td><input [(ngModel)]="categoryForm.name"></td>
+              <td><input [(ngModel)]="categoryForm.name" [placeholder]="'admin.categories.name' | translate"></td>
               <td>
-                <button class="btn-save" (click)="saveCategory(category.id)">Opslaan</button>
-                <button class="btn-cancel" (click)="cancelCategory()">Annuleren</button>
+                <button class="btn-save" (click)="saveCategory(category.id)">{{ 'admin.save' | translate }}</button>
+                <button class="btn-cancel" (click)="cancelCategory()">{{ 'admin.cancel' | translate }}</button>
               </td>
             </tr>
           } @else {
@@ -107,15 +107,15 @@
               <td>
                 @if (confirmDeleteCategoryId === category.id) {
                   <div class="confirm-delete">
-                    <span>Verwijderen?</span>
+                    <span>{{ 'admin.confirm_delete' | translate }}</span>
                     <div class="buttons">
-                      <button class="btn-delete-yes" (click)="deleteCategory(category.id)">Ja</button>
-                      <button class="btn-delete-no" (click)="confirmDeleteCategoryId = null">Nee</button>
+                      <button class="btn-delete-yes" (click)="deleteCategory(category.id)">{{ 'admin.confirm_yes' | translate }}</button>
+                      <button class="btn-delete-no" (click)="confirmDeleteCategoryId = null">{{ 'admin.confirm_no' | translate }}</button>
                     </div>
                   </div>
                 } @else {
-                  <button class="btn-edit" (click)="startEditCategory(category)">Bewerken</button>
-                  <button class="btn-delete" (click)="deleteCategory(category.id)">Verwijderen</button>
+                  <button class="btn-edit" (click)="startEditCategory(category)">{{ 'admin.edit' | translate }}</button>
+                  <button class="btn-delete" (click)="deleteCategory(category.id)">{{ 'admin.delete' | translate }}</button>
                 }
               </td>
             </tr>
@@ -123,15 +123,15 @@
         }
         @if (showNewCategoryForm) {
           <tr class="edit-row">
-            <td><input [(ngModel)]="categoryForm.name" placeholder="Naam"></td>
+            <td><input [(ngModel)]="categoryForm.name" [placeholder]="'admin.categories.name' | translate"></td>
             <td>
-              <button class="btn-save" (click)="createCategory()">Aanmaken</button>
-              <button class="btn-cancel" (click)="cancelCategory()">Annuleren</button>
+              <button class="btn-save" (click)="createCategory()">{{ 'admin.create' | translate }}</button>
+              <button class="btn-cancel" (click)="cancelCategory()">{{ 'admin.cancel' | translate }}</button>
             </td>
           </tr>
         }
       </tbody>
     </table>
-    <button class="btn-add" (click)="showNewCategoryForm = true; editingCategoryId = null">+ Categorie toevoegen</button>
+    <button class="btn-add" (click)="showNewCategoryForm = true; editingCategoryId = null">{{ 'admin.categories.add' | translate }}</button>
   </section>
 </div>

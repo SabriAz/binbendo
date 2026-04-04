@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-register',
@@ -28,6 +28,7 @@ export class Register {
   constructor(
     private authService: AuthService,
     private router: Router,
+    private translate: TranslateService,
   ) {}
 
   register(): void {
@@ -37,8 +38,8 @@ export class Register {
         this.router.navigate(['/']);
       },
       error: () => {
-        this.errorMessage = 'E-mailadres klopt niet!';
-      },
+        this.errorMessage = this.translate.instant('register.error');
+      }
     });
   }
 

@@ -28,7 +28,7 @@
       </article>
     }
     @empty {
-      <p class="no-results">Geen resultaten gevonden voor "{{ filterState.searchQuery() }}"</p>
+      <p class="no-results">{{ 'products.no_results' | translate }} "{{ filterState.searchQuery() }}"</p>
     }
   </section>
 </div>
