@@ -3,6 +3,7 @@ import { AuthService } from '../services/auth.service';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { CartService } from '../services/cart.service';
 
 @Component({
   selector: 'app-login',
@@ -20,12 +21,14 @@ export class Login {
     private authService: AuthService,
     private router: Router,
     private translate: TranslateService,
+    private cartService: CartService,
   ) {}
 
   login(): void {
     this.authService.login({ email: this.email, password: this.password }).subscribe({
       next: (response) => {
         localStorage.setItem('token', response.token);
+        this.cartService.refreshCount();
         this.router.navigate(['/']);
       },
       error: () => {

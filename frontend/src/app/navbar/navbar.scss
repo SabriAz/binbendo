@@ -8,6 +8,11 @@ nav {
   background-color: $primary;
   border-radius: 5rem;
 
+  .material-icons {
+    font-size: 3rem;
+    vertical-align: middle;
+  }
+
   .brand {
     align-self: start;
     font-size: 3rem;
