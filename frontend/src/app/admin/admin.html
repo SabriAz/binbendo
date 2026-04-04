@@ -43,9 +43,13 @@
               <td>{{ product.category?.name }}</td>
               <td>
                 @if (confirmDeleteProductId === product.id) {
-                  <span>Verwijderen?</span>
-                  <button class="btn-save" (click)="deleteProduct(product.id)">Ja</button>
-                  <button class="btn-cancel" (click)="confirmDeleteProductId = null">Nee</button>
+                  <div class="confirm-delete">
+                    <span>Verwijderen?</span>
+                    <div class="buttons">
+                      <button class="btn-delete-yes" (click)="deleteProduct(product.id)">Ja</button>
+                      <button class="btn-delete-no" (click)="confirmDeleteProductId = null">Nee</button>
+                    </div>
+                  </div>
                 } @else {
                   <button class="btn-edit" (click)="startEditProduct(product)">Bewerken</button>
                   <button class="btn-delete" (click)="deleteProduct(product.id)">Verwijderen</button>
@@ -102,9 +106,13 @@
               <td>{{ category.name }}</td>
               <td>
                 @if (confirmDeleteCategoryId === category.id) {
-                  <span>Verwijderen?</span>
-                  <button class="btn-save" (click)="deleteCategory(category.id)">Ja</button>
-                  <button class="btn-cancel" (click)="confirmDeleteCategoryId = null">Nee</button>
+                  <div class="confirm-delete">
+                    <span>Verwijderen?</span>
+                    <div class="buttons">
+                      <button class="btn-delete-yes" (click)="deleteCategory(category.id)">Ja</button>
+                      <button class="btn-delete-no" (click)="confirmDeleteCategoryId = null">Nee</button>
+                    </div>
+                  </div>
                 } @else {
                   <button class="btn-edit" (click)="startEditCategory(category)">Bewerken</button>
                   <button class="btn-delete" (click)="deleteCategory(category.id)">Verwijderen</button>

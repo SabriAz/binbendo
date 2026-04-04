@@ -23,6 +23,20 @@
       margin-bottom: 1rem;
     }
 
+    .confirm-delete {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      font-weight: bold;
+
+      .buttons {
+        display: flex;
+        gap: 0.5rem;
+      }
+    }
+
     table {
       width: 100%;
       border-collapse: collapse;
@@ -62,7 +76,7 @@
       }
     }
 
-    .btn-edit, .btn-delete, .btn-save, .btn-cancel, .btn-add {
+    .btn-edit, .btn-delete, .btn-save, .btn-cancel, .btn-add, .btn-delete-yes, .btn-delete-no {
       padding: 0.4rem 0.875rem;
       border: none;
       border-radius: 0.5rem;
@@ -76,20 +90,23 @@
 
     .btn-edit {
       background: none;
-      border: 2px solid black;
-      margin-bottom: 0.2rem;
+      border: 2px solid $secondary;
+      color: $secondary;
+      margin-bottom: 0;
       min-width: 7.5rem;
 
-      &:hover { background: $hover-white; }
+      &:hover {
+        background: $secondary;
+        color: white;
+      }
     }
 
     .btn-delete {
-      background: $primary;
-      border: 2px solid #666;
-      color: white;
-      margin-top: 0.2rem;
+      background: none;
+      border: 2px solid $primary;
+      color: $primary;
+      margin-top: 0;
       min-width: 7.5rem;
-
 
       &:hover {
         background: $primary;
@@ -97,17 +114,44 @@
       }
     }
 
-    .btn-save {
-      background: #2a9d2a;
+    .btn-delete-yes {
+      background: $primary;
+      min-width: 2.5rem;
       color: white;
 
-      &:hover { background: #1e7a1e; }
+      &:hover {
+        background: $primary-dark;
+      }
+    }
+
+    .btn-delete-no {
+      background: none;
+      border: 2px solid $secondary;
+      color: $secondary;
+      min-width: 2.5rem;
+
+      &:hover {
+        background: $secondary;
+        color: white;
+      }
+    }
+
+    .btn-save {
+      background: $primary;
+      color: white;
+      min-width: 7.5rem;
+
+
+      &:hover {
+        background: $primary-dark;
+      }
     }
 
     .btn-cancel {
       background: none;
       border: 2px solid $secondary;
       color: $secondary;
+      min-width: 7.5rem;
 
       &:hover {
         background: $secondary;
