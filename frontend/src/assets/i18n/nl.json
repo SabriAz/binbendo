@@ -2,7 +2,8 @@
   "nav": {
     "cart": "Winkelwagen",
     "profile": "Profiel",
-    "login": "Log in"
+    "login": "Log in",
+    "admin": "Admin paneel"
   },
   "login": {
     "title": "Inloggen",

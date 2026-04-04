@@ -2,7 +2,8 @@
   "nav": {
     "cart": "Cart",
     "profile": "Profile",
-    "login": "Log in"
+    "login": "Log in",
+    "admin": "Admin panel"
   },
   "login": {
     "title": "Log In",
