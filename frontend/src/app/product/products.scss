@@ -102,6 +102,8 @@ section {
 }
 
 .product-card {
+  display: flex;
+  flex-direction: column;
   background: white;
   border-radius: 0.75rem;
   padding: 1.5rem;
@@ -113,6 +115,9 @@ section {
   h2 {
     display: flex;
     justify-content: center;
+    min-height: 3.5rem;
+    align-items: flex-start;
+    height: 3.5rem;
   }
 
   img {
