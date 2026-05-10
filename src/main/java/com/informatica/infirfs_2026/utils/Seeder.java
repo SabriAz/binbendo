@@ -36,6 +36,8 @@ public class Seeder {
 
     @EventListener
     public void seed(ContextRefreshedEvent event) {
+        if (categoryRepository.count() > 0) return;
+
         CustomUser customUser = new CustomUser("admin@email.com", passwordEncoder.encode("Admin123!"), Role.ROLE_ADMIN);
 
         this.userRepository.save(customUser);
