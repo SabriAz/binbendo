@@ -3,6 +3,7 @@ import { RouterLink } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { CartService } from '../services/cart.service';
+import { ColorblindService } from '../services/colorblind.service';
 
 @Component({
   selector: 'app-navbar',
@@ -16,6 +17,7 @@ export class Navbar {
   constructor(
     public authService: AuthService,
     public cartService: CartService,
+    public colorblindService: ColorblindService,
     private translate: TranslateService,
   ) {
     translate.setDefaultLang('nl');

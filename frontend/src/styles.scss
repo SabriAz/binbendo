@@ -11,3 +11,62 @@ $shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1);
 * {
   font-family: 'Nunito', sans-serif;
 }
+
+
+// CSS custom properties (worden overschreven door colorblind mode)
+:root {
+  --color-primary: #{$primary};
+  --color-primary-dark: #{$primary-dark};
+  --color-bg: #ffffff;
+  --color-text: #111111;
+  --color-secondary: #{$secondary};
+  --color-disabled: #{$disabled};
+  --color-shadow: #{$shadow};
+  --color-hover: #{$hover-white};
+  --color-badge-bg: white;
+  --color-badge-text: #{$primary};
+  --border-accent: none;
+}
+
+// Colorblind mode overrides
+body.colorblind {
+  --color-primary: #000000;
+  --color-primary-dark: #222222;
+  --color-bg: #ffffff;
+  --color-text: #000000;
+  --color-secondary: #333333;
+  --color-disabled: #aaaaaa;
+  --color-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.4);
+  --color-hover: #e0e0e0;
+  --color-badge-bg: #ffffff;
+  --color-badge-text: #000000;
+  --border-accent: 2px solid #000000;
+
+  // Alles zwart-wit
+  filter: grayscale(100%);
+
+  // Maar borders en outline juist extra duidelijk
+  a, button, input, select, textarea {
+    outline-offset: 2px;
+  }
+
+  // Klikbare elementen krijgen zichtbare border
+  button, a {
+    border: 2px solid transparent;
+    &:hover, &:focus {
+      border-color: #000000 !important;
+      outline: 2px solid #000000;
+    }
+  }
+
+  // Kaarten en containers krijgen harde border
+  .card, mat-card, [class*="card"], [class*="product"] {
+    border: 2px solid #000000 !important;
+    box-shadow: none !important;
+  }
+
+  // Inputs duidelijk
+  input, select, textarea {
+    border: 2px solid #000000 !important;
+  }
+}

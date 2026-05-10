@@ -29,5 +29,14 @@
         <img src="/assets/images/en_flag.png" alt="English">
       </button>
     </div>
+    <button
+      class="colorblind-toggle"
+      (click)="colorblindService.toggle()"
+      [class.active]="colorblindService.isColorblind()"
+      title="{{ 'nav.colorblind' | translate }}">
+  <span class="material-icons">
+    {{ colorblindService.isColorblind() ? 'visibility' : 'visibility_off' }}
+  </span>
+    </button>
   </div>
 </nav>
