@@ -13,60 +13,209 @@ $shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1);
 }
 
 
-// CSS custom properties (worden overschreven door colorblind mode)
+// Colorblind mode
+
 :root {
-  --color-primary: #{$primary};
-  --color-primary-dark: #{$primary-dark};
-  --color-bg: #ffffff;
-  --color-text: #111111;
-  --color-secondary: #{$secondary};
-  --color-disabled: #{$disabled};
-  --color-shadow: #{$shadow};
-  --color-hover: #{$hover-white};
-  --color-badge-bg: white;
-  --color-badge-text: #{$primary};
-  --border-accent: none;
+  --cb-bg: white;
+  --cb-surface: white;
+  --cb-text: #111111;
+  --cb-text-muted: #555555;
+  --cb-primary: #{$primary};
+  --cb-primary-dark: #{$primary-dark};
+  --cb-border: #{$secondary};
+  --cb-hover-bg: #{$hover-white};
+  --cb-shadow: #{$shadow};
+  --cb-badge-bg: white;
+  --cb-badge-text: #{$primary};
+  --cb-disabled: #{$disabled};
 }
 
-// Colorblind mode overrides
 body.colorblind {
-  --color-primary: #000000;
-  --color-primary-dark: #222222;
-  --color-bg: #ffffff;
-  --color-text: #000000;
-  --color-secondary: #333333;
-  --color-disabled: #aaaaaa;
-  --color-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.4);
-  --color-hover: #e0e0e0;
-  --color-badge-bg: #ffffff;
-  --color-badge-text: #000000;
-  --border-accent: 2px solid #000000;
+  --cb-bg: #ffffff;
+  --cb-surface: #ffffff;
+  --cb-text: #000000;
+  --cb-text-muted: #000000;
+  --cb-primary: #000000;
+  --cb-primary-dark: #222222;
+  --cb-border: #000000;
+  --cb-hover-bg: #eeeeee;
+  --cb-shadow: 0 0 0 2px #000000;
+  --cb-badge-bg: #000000;
+  --cb-badge-text: #ffffff;
+  --cb-disabled: #888888;
 
-  // Alles zwart-wit
-  filter: grayscale(100%);
+  // Pagina achtergrond
+  background-color: #ffffff !important;
+  color: #000000 !important;
 
-  // Maar borders en outline juist extra duidelijk
-  a, button, input, select, textarea {
-    outline-offset: 2px;
+  // Alle tekst zwart
+  * {
+    color: #000000 !important;
+    text-decoration-color: #000000 !important;
   }
 
-  // Klikbare elementen krijgen zichtbare border
-  button, a {
-    border: 2px solid transparent;
-    &:hover, &:focus {
-      border-color: #000000 !important;
-      outline: 2px solid #000000;
-    }
-  }
-
-  // Kaarten en containers krijgen harde border
-  .card, mat-card, [class*="card"], [class*="product"] {
+  // Alle witte vlakken (cards, containers, panels)
+  .cart-item,
+  .product-card,
+  .product-detail,
+  .login-container,
+  .register-container,
+  .profile-card,
+  .order-card,
+  .filters {
+    background: #ffffff !important;
     border: 2px solid #000000 !important;
     box-shadow: none !important;
   }
 
-  // Inputs duidelijk
+  // Navbar zwart ipv rood
+  nav {
+    background-color: #000000 !important;
+
+    a, .material-icons {
+      color: #ffffff !important;
+    }
+
+    .cart-badge {
+      background: #ffffff !important;
+      color: #000000 !important;
+      border: 1px solid #000000 !important;
+    }
+
+    .colorblind-toggle {
+      color: #ffffff !important;
+    }
+  }
+
+  // Alle rode knoppen naar zwart met witte tekst
+  button:not(:disabled),
+  .btn-logout,
+  .place-order,
+  .confirm-yes,
+  .add-to-cart-button,
+  .back-button {
+    background: #000000 !important;
+    color: #ffffff !important;
+    border: 2px solid #000000 !important;
+  }
+
+  // Outline knoppen naar witte achtergrond, zwarte border + tekst
+  .delete-item,
+  .clear-cart,
+  .confirm-no,
+  .btn-outline,
+  .clear-categories-button {
+    background: #ffffff !important;
+    color: #000000 !important;
+    border: 2px solid #000000 !important;
+  }
+
+  // Hover op alle knoppen: omgekeerd (wit ipv zwart)
+  button:hover:not(:disabled) {
+    background: #ffffff !important;
+    color: #000000 !important;
+    border-color: #000000 !important;
+    outline: 2px solid #000000 !important;
+  }
+
+  // Disabled knoppen
+  button:disabled {
+    background: #888888 !important;
+    color: #ffffff !important;
+    border-color: #888888 !important;
+  }
+
+  // Inputs
   input, select, textarea {
+    background: #ffffff !important;
+    color: #000000 !important;
+    border: 2px solid #000000 !important;
+
+    &:focus {
+      outline: 3px solid #000000 !important;
+    }
+  }
+
+  // Actieve categorie filter
+  .filters ul li.active {
+    background: #000000 !important;
+    color: #ffffff !important;
+    border-color: #000000 !important;
+  }
+
+  // Product card border top was rood, nu zwart
+  .product-card {
+    border-top: 0.25rem solid #000000 !important;
+  }
+
+  // Product detail border top
+  .product-detail {
+    border-top: 0.25rem solid #000000 !important;
+  }
+
+  // Totaalprijs in cart was rood
+  .total h2 {
+    color: #000000 !important;
+  }
+
+  // Order header hover
+  .order-header:hover {
+    background: #eeeeee !important;
+  }
+
+  // Order items border
+  .order-items {
+    border-top: 2px solid #000000 !important;
+  }
+
+  .order-item {
+    border-bottom: 1px solid #000000 !important;
+  }
+
+  // Avatar in profile was grijs
+  .avatar {
+    background: #000000 !important;
+    color: #ffffff !important;
+  }
+
+  // Password requirements
+  .requirements li {
+    color: #000000 !important;
+
+    // Tekst wordt dikker ipv kleur veranderd
+    &.valid {
+      font-weight: bold !important;
+
+      .icon {
+        color: #000000 !important;
+      }
+    }
+  }
+
+  .quantity button {
+    border-color: #000000 !important;
+  }
+
+  // Cart totaal border
+  .total {
+    border-top-color: #000000 !important;
+  }
+
+  // Lang switch vlaggetjes: filter weg, gewoon zwart-wit
+  .lang-switch img {
+    filter: grayscale(100%) !important;
+    border: 1px solid #000000 !important;
+  }
+
+  .btn-orders {
+    background: #000000 !important;
+    color: #ffffff !important;
+    border: 2px solid #000000 !important;
+  }
+
+  .btn-products {
+    background: #ffffff !important;
+    color: #000000 !important;
     border: 2px solid #000000 !important;
   }
 }
