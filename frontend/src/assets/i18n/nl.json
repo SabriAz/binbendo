@@ -3,7 +3,8 @@
     "cart": "Winkelwagen",
     "profile": "Profiel",
     "login": "Log in",
-    "admin": "Admin paneel"
+    "admin": "Admin paneel",
+    "colorblind": "Kleurenblind modus"
   },
   "login": {
     "title": "Inloggen",

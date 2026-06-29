@@ -3,7 +3,8 @@
     "cart": "Cart",
     "profile": "Profile",
     "login": "Log in",
-    "admin": "Admin panel"
+    "admin": "Admin panel",
+    "colorblind": "Colorblind mode"
   },
   "login": {
     "title": "Log In",
