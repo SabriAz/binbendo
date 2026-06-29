@@ -26,7 +26,7 @@ public class JWTFilter extends OncePerRequestFilter {
     }
 
     // This function checks whether the JWT token exists, or is empty etc.
-    // When valid, user details get loaded in en it gives authenticated user back thats valid
+    // When valid, user details get loaded in and it gives authenticated user back thats valid
     // If anything still goes wrong user will get 401 with message
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
