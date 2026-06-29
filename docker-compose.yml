@@ -6,8 +6,8 @@ services:
     restart: always
     networks:
       - web
-    expose:
-      - "80"
+    ports:
+      - "3001:80"
 
   backend:
     build:
