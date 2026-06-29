@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.informatica</groupId>
-	<artifactId>INFIRFS_2026</artifactId>
+	<artifactId>binbendo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>INFIRFS_2026</name>
 	<description>INFIRFS_2026</description>
