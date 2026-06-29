@@ -92,11 +92,12 @@ nav {
     transition: opacity 0.2s ease;
 
     &:hover {
-      opacity: 0.5;
+      opacity: 1;
+      background: none;
     }
 
     &.active {
-      opacity: 0.5;
+      opacity: 1;
       .material-icons {
         font-weight: bold;
       }
