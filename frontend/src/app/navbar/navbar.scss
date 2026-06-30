@@ -11,12 +11,23 @@ nav {
   .material-icons {
     font-size: 3rem;
     vertical-align: middle;
+    opacity: 1;
+
+    &:hover {
+      opacity: 0.7;
+    }
   }
+
 
   .brand {
     align-self: start;
     font-size: 3rem;
     font-weight: bolder;
+    opacity: 1;
+
+    &:hover {
+      opacity: 0.70;
+    }
   }
 
   .nav-left {
@@ -43,7 +54,7 @@ nav {
       }
 
       &:hover {
-        opacity: 0.9;
+        opacity: 0.7;
       }
 
       img {
